@@ -60,14 +60,6 @@ public class Server {
 
 
         JSONObject jsonObject = new JSONObject(body);
-        System.out.println(jsonObject);
-
-        /*Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonParser jp = new JsonParser();
-        JsonElement je = jp.parse(jsonObject.toString());
-        String prettyJsonString = gson.toJson(je);
-
-        System.out.println(prettyJsonString);*/
 
         HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Patient")
                 .header("content-type", "application/json")
@@ -169,6 +161,9 @@ public class Server {
             patientIDs.add(id);
         }
         System.out.println(patientIDs);
+        System.out.println(request.getBody());
+        System.out.println(request.getStatusText());
+        System.out.println(request.isSuccess());
         System.out.println(request.getStatus());
         return patientIDs;
     }
@@ -198,11 +193,10 @@ public class Server {
             observations.add(observation);
         }
         System.out.println(observations.toString());
+        System.out.println(request.getBody());
+        System.out.println(request.getStatusText());
+        System.out.println(request.isSuccess());
         System.out.println(request.getStatus());
-        return null;
+        return observations;
     }
-
-    // todo getObservation
-
 }
-
