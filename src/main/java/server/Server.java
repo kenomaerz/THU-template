@@ -34,15 +34,15 @@ public class Server {
 
     public boolean testConnection() {
         System.out.println("TestConnection");
-        HttpResponse<JsonNode> response = Unirest.post("http://httpbin.org/post")
-                .header("accept", "application/json")
-                .queryString("apiKey", "123")
-                .field("parameter", "value")
-                .field("firstname", "Gary")
-                .asJson();
+        HttpResponse<JsonNode> response = Unirest.get("http://localhost:8080/metadata").asJson();
+        int status = response.getStatus();
+
         System.out.println(response.getStatusText());
         System.out.println(response.isSuccess());
         System.out.println(response.getStatus());
+        if (status == 200) {
+            return true;
+        }
         return false;
     }
 
@@ -80,7 +80,6 @@ public class Server {
 
         return null;
     }
-
 
     public String createNumericalObservation(Observation observation, String patientID) {
         System.out.println("TestConnection");
@@ -170,14 +169,35 @@ public class Server {
             patientIDs.add(id);
         }
         System.out.println(patientIDs);
+        System.out.println(request.getStatus());
         return patientIDs;
     }
 
-    public Observation getObservations(String patientID) {
+    public ArrayList<Observation> getObservations(String patientID) {
         HttpResponse<JsonNode> request = Unirest.get("http://localhost:8080/Observation?subject=" + patientID)
                 .asJson();
         JSONObject jsonObj = request.getBody().getObject();
-        System.out.println(jsonObj);
+        ArrayList<Observation> observations = new ArrayList<>();
+        JSONArray items = jsonObj.getJSONArray("entry");
+
+        for (int i = 0; i < items.length(); i++) {
+
+            JSONObject objects = items.getJSONObject(i);
+            JSONObject resource = (JSONObject) objects.get("resource");
+            JSONObject code = (JSONObject) resource.get("code");
+            JSONArray coding = code.getJSONArray("coding");
+            JSONObject coding1 = coding.getJSONObject(0);
+            String obsSystem = coding1.getString("system");
+            String obsCode = coding1.getString("code");
+            JSONObject valueCodeableConcept = (JSONObject) resource.get("valueCodeableConcept");
+            JSONArray valueCoding = valueCodeableConcept.getJSONArray("coding");
+            JSONObject valueCoding1 = valueCoding.getJSONObject(0);
+            String valSystem = valueCoding1.getString("system");
+            String valCode = valueCoding1.getString("code");
+            Observation observation = new Observation(obsSystem, obsCode, valSystem, valCode);
+            observations.add(observation);
+        }
+        System.out.println(observations.toString());
         System.out.println(request.getStatus());
         return null;
     }
