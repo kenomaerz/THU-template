@@ -3,14 +3,11 @@
  */
 package server;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import error.DuplicateServerException;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
+import kong.unirest.json.JSONArray;
 import kong.unirest.json.JSONObject;
 import model.Gender;
 import model.Observation;
@@ -125,7 +122,7 @@ public class Server {
         HashMap<String, Object> code = new HashMap<>();
         HashMap<String, Object> codings = new HashMap<>();
         HashMap<String, Object> reference = new HashMap<>();
-        HashMap<String, Object> valueCodeableConcept= new HashMap<>();
+        HashMap<String, Object> valueCodeableConcept = new HashMap<>();
         HashMap<String, Object> codingsValue = new HashMap<>();
         Object[] coding = {codings};
         body.put("resourceType", "Observation");
@@ -143,14 +140,6 @@ public class Server {
 
         JSONObject jsonObject = new JSONObject(body);
         System.out.println(jsonObject);
-
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonParser jp = new JsonParser();
-        JsonElement je = jp.parse(jsonObject.toString());
-        String prettyJsonString = gson.toJson(je);
-
-        System.out.println(prettyJsonString);
 
         HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Observation")
                 .header("content-type", "application/json")
@@ -170,33 +159,21 @@ public class Server {
                 .asJson();
         JSONObject jsonObj = request.getBody().getObject();
         System.out.println(jsonObj);
+        ArrayList<String> patientIDs = new ArrayList<>();
+        JSONArray items = jsonObj.getJSONArray("entry");
+        System.out.println(items);
 
-      /*  Iterator<String > keys = jsonObject.keys();
-        if (keys.hasNext()) {
-            String key = (String) keys.next(); // First key in your json object
-        }*/
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonParser jp = new JsonParser();
-        JsonElement je = jp.parse(jsonObj.toString());
-        String prettyJsonString = gson.toJson(je);
-
-
-        System.out.println(prettyJsonString);
-
-       /* ArrayList<String> resultsEnd = new ArrayList<>();
-        JSONArray c = jsonObj.getJSONArray("id");
-        for (int i = 0; i < c.length(); i++) {
-            JSONObject obj = c.getJSONObject(i);
-            String A = obj.getString("id");
-            System.out.println(A);
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject objects = items.getJSONObject(i);
+            JSONObject objectResource = (JSONObject) objects.get("resource");
+            String id = objectResource.getString("id");
+            patientIDs.add(id);
         }
-        System.out.println(resultsEnd);*/
-        System.out.println(request.getStatus());
-        return null;
+        System.out.println(patientIDs);
+        return patientIDs;
     }
 
-    public HashMap<String, Object> getObservations(String patientID) {
+    public Observation getObservations(String patientID) {
         HttpResponse<JsonNode> request = Unirest.get("http://localhost:8080/Observation?subject=" + patientID)
                 .asJson();
         JSONObject jsonObj = request.getBody().getObject();
