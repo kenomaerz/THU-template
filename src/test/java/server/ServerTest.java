@@ -13,7 +13,7 @@ public class ServerTest {
 	public void test() {
 		Server server = new Server();
 		//server.testConnection();
-		server.createPatient(Gender.FEMALE);
+		server.createPatient("Doe", "Jane", Gender.FEMALE);
 	}
 
 }

@@ -3,12 +3,17 @@
  */
 package server;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import error.DuplicateServerException;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONObject;
 import model.Gender;
+import model.Observation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,70 +49,28 @@ public class Server {
         return false;
     }
 
-    //todo delete after discussed
-    /*public String createPatient() {
-        System.out.println("TestConnection");
-
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Patient")
-                .header("content-type", "application/json")
-                .body("{\n" +
-                        "    \"resourceType\": \"Patient\",\n" +
-                        "    \"name\": [\n" +
-                        "        {\n" +
-                        "            \"family\": \"Doe\",\n" +
-                        "            \"given\": [\n" +
-                        "                \"John\"\n" +
-                        "            ]\n" +
-                        "        }\n" +
-                        "    ],\n" +
-                        "    \"gender\": \"male\"\n" +
-                        "}")
-                .asJson();
-        System.out.println(response.getBody());
-        System.out.println(response.getStatusText());
-        System.out.println(response.isSuccess());
-        System.out.println(response.getStatus());
-
-        return null;
-    }*/
-
-/*	public String createPatient(Gender gender) {
-		System.out.println("TestConnection");
-		HashMap<String, Object> body = new HashMap<>();
-		body.put("resourceType", "Patient");
-		HashMap<String, Object> name= new HashMap<>();
-		name.put("family", "Doe");
-		name.put("given", new ArrayList<String>().add("John"));
-		body.put("name", new ArrayList<Object>().add(name));
-
-		HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Patient")
-			      .header("accept", "application/json")
-			      .body(body)
-			      .asJson();
-		System.out.println(response.getBody());
-		System.out.println(response.getStatusText());
-		System.out.println(response.isSuccess());
-		System.out.println(response.getStatus());
-		
-		return null;
-	}*/
-
-    //todo firstnames, lastname
-    public String createPatient(Gender gender) {
+    public String createPatient(String lastname, String firstname, Gender gender) {
         System.out.println("TestConnection");
         HashMap<String, Object> body = new HashMap<>();
         HashMap<String, Object> name = new HashMap<>();
         Object[] names = {name};
-        String[] firstnames = {"John"};
+        String[] firstnames = {firstname};
         body.put("resourceType", "Patient");
-        name.put("family", "Doe");
+        name.put("family", lastname);
         name.put("given", firstnames);
         body.put("name", names);
-        body.put("gender", gender);
+        body.put("gender", gender.toString().toLowerCase());
 
 
         JSONObject jsonObject = new JSONObject(body);
         System.out.println(jsonObject);
+
+        /*Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser jp = new JsonParser();
+        JsonElement je = jp.parse(jsonObject.toString());
+        String prettyJsonString = gson.toJson(je);
+
+        System.out.println(prettyJsonString);*/
 
         HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Patient")
                 .header("content-type", "application/json")
@@ -122,7 +85,7 @@ public class Server {
     }
 
 
-    public String createNumericalObservation(String observationSystem, String observationCode, String patientID, String value, String unit) {
+    public String createNumericalObservation(Observation observation, String patientID) {
         System.out.println("TestConnection");
         HashMap<String, Object> body = new HashMap<>();
         HashMap<String, Object> code = new HashMap<>();
@@ -133,17 +96,61 @@ public class Server {
         body.put("resourceType", "Observation");
         body.put("code", code);
         code.put("coding", coding);
-        codings.put("system", "http://sfb125.de/ontology/ihCCApplicationOntology/");
-        codings.put("code", "albumin_concentration");
+        codings.put("system", observation.getObservationSystem());
+        codings.put("code", observation.getObservationCode());
         body.put("subject", reference);
         reference.put("reference", "Patient/" + patientID);
         body.put("valueQuantity", valueQuantity);
-        valueQuantity.put("value", 0.4);
-        valueQuantity.put("unit", "g/l");
-
+        valueQuantity.put("value", observation.getNumericalValue());
+        valueQuantity.put("unit", observation.getUnit());
 
         JSONObject jsonObject = new JSONObject(body);
         System.out.println(jsonObject);
+
+        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Observation")
+                .header("content-type", "application/json")
+                .body(jsonObject)
+                .asJson();
+        System.out.println(response.getBody());
+        System.out.println(response.getStatusText());
+        System.out.println(response.isSuccess());
+        System.out.println(response.getStatus());
+
+        return null;
+    }
+
+    public String createCategoricalObservation(Observation observation, String patientID) {
+        System.out.println("TestConnection");
+        HashMap<String, Object> body = new HashMap<>();
+        HashMap<String, Object> code = new HashMap<>();
+        HashMap<String, Object> codings = new HashMap<>();
+        HashMap<String, Object> reference = new HashMap<>();
+        HashMap<String, Object> valueCodeableConcept= new HashMap<>();
+        HashMap<String, Object> codingsValue = new HashMap<>();
+        Object[] coding = {codings};
+        body.put("resourceType", "Observation");
+        body.put("code", code);
+        code.put("coding", coding);
+        codings.put("system", observation.getObservationSystem());
+        codings.put("code", observation.getObservationCode());
+        body.put("subject", reference);
+        reference.put("reference", "Patient/" + patientID);
+        body.put("valueCodeableConcept", valueCodeableConcept);
+        Object[] codingValue = {codingsValue};
+        valueCodeableConcept.put("coding", codingValue);
+        codingsValue.put("system", observation.getValueSystem());
+        codingsValue.put("code", observation.getValueCode());
+
+        JSONObject jsonObject = new JSONObject(body);
+        System.out.println(jsonObject);
+
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser jp = new JsonParser();
+        JsonElement je = jp.parse(jsonObject.toString());
+        String prettyJsonString = gson.toJson(je);
+
+        System.out.println(prettyJsonString);
 
         HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Observation")
                 .header("content-type", "application/json")
@@ -163,6 +170,20 @@ public class Server {
                 .asJson();
         JSONObject jsonObj = request.getBody().getObject();
         System.out.println(jsonObj);
+
+      /*  Iterator<String > keys = jsonObject.keys();
+        if (keys.hasNext()) {
+            String key = (String) keys.next(); // First key in your json object
+        }*/
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser jp = new JsonParser();
+        JsonElement je = jp.parse(jsonObj.toString());
+        String prettyJsonString = gson.toJson(je);
+
+
+        System.out.println(prettyJsonString);
+
        /* ArrayList<String> resultsEnd = new ArrayList<>();
         JSONArray c = jsonObj.getJSONArray("id");
         for (int i = 0; i < c.length(); i++) {
@@ -183,6 +204,8 @@ public class Server {
         System.out.println(request.getStatus());
         return null;
     }
+
+    // todo getObservation
 
 }
 
