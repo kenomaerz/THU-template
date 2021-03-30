@@ -77,7 +77,6 @@ public class Server {
         return patientID;
     }
 
-    // todo
     public String createNumericalObservation(Observation observation, String patientID) {
         System.out.println("TestConnection");
         HashMap<String, Object> body = new HashMap<>();
@@ -98,7 +97,7 @@ public class Server {
         valueQuantity.put("unit", observation.getUnit());
 
         JSONObject jsonObject = new JSONObject(body);
-        System.out.println(jsonObject);
+        //System.out.println(jsonObject);
 
         HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Observation")
                 .header("content-type", "application/json")
@@ -113,12 +112,12 @@ public class Server {
         System.out.println(response.getStatusText());
         System.out.println(response.isSuccess());
         System.out.println(response.getStatus());
-        return null;
+        return obsID;
     }
 
 
     public String createCategoricalObservation(Observation observation, String patientID) {
-        //System.out.println("TestConnection");
+        System.out.println("TestConnection");
         HashMap<String, Object> body = new HashMap<>();
         HashMap<String, Object> code = new HashMap<>();
         HashMap<String, Object> codings = new HashMap<>();
@@ -151,16 +150,15 @@ public class Server {
         Observation obs = (Observation) allObservations.get(allObservations.size() - 1);
         String obsID = obs.getObservationID();
 
-        //System.out.println(response.getBody());
-        //System.out.println(response.getStatusText());
-        //System.out.println(response.isSuccess());
-        //System.out.println(response.getStatus());
+        System.out.println(response.getBody());
+        System.out.println(response.getStatusText());
+        System.out.println(response.isSuccess());
+        System.out.println(response.getStatus());
         return obsID;
     }
 
 
     public ArrayList<String> getPatients() {
-
         HttpResponse<JsonNode> request = Unirest.get("http://localhost:8080/Patient")
                 .asJson();
         JSONObject jsonObj = request.getBody().getObject();
@@ -198,14 +196,23 @@ public class Server {
             JSONObject coding1 = coding.getJSONObject(0);
             String obsSystem = coding1.getString("system");
             String obsCode = coding1.getString("code");
-            JSONObject valueCodeableConcept = (JSONObject) resource.get("valueCodeableConcept");
-            JSONArray valueCoding = valueCodeableConcept.getJSONArray("coding");
-            JSONObject valueCoding1 = valueCoding.getJSONObject(0);
-            String valSystem = valueCoding1.getString("system");
-            String valCode = valueCoding1.getString("code");
-            Observation observation = new Observation(obsSystem, obsCode, valSystem, valCode);
-            observation.setObservationID(obsID);
-            observations.add(observation);
+            if (resource.has("valueCodeableConcept")) {
+                JSONObject valueCodeableConcept = (JSONObject) resource.get("valueCodeableConcept");
+                JSONArray valueCoding = valueCodeableConcept.getJSONArray("coding");
+                JSONObject valueCoding1 = valueCoding.getJSONObject(0);
+                String valSystem = valueCoding1.getString("system");
+                String valCode = valueCoding1.getString("code");
+                Observation observation = new Observation(obsSystem, obsCode, valSystem, valCode);
+                observation.setObservationID(obsID);
+                observations.add(observation);
+            } else if (resource.has("valueQuantity")) {
+                JSONObject valueQuantity = (JSONObject) resource.get("valueQuantity");
+                Double value = valueQuantity.getDouble("value");
+                String unit = valueQuantity.getString("unit");
+                Observation observation = new Observation(obsSystem, obsCode, value, unit);
+                observation.setObservationID(obsID);
+                observations.add(observation);
+            }
         }
         System.out.println(request.getBody());
         System.out.println(request.getStatusText());
