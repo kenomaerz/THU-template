@@ -35,7 +35,7 @@ public class Server {
     //todo
     public boolean testConnection() {
         System.out.println("TestConnection");
-        HttpResponse<JsonNode> response = Unirest.get("http://localhost:8080/metadata").asJson();
+        HttpResponse<JsonNode> response = Unirest.get(BASE_URL + "/metadata").asJson();
         int status = response.getStatus();
 
         System.out.println(response.getStatusText());
@@ -59,10 +59,9 @@ public class Server {
         body.put("name", names);
         body.put("gender", gender.toString().toLowerCase());
 
-
         JSONObject jsonObject = new JSONObject(body);
 
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Patient")
+        HttpResponse<JsonNode> response = Unirest.post(BASE_URL + "/Patient")
                 .header("content-type", "application/json")
                 .body(jsonObject)
                 .asJson();
@@ -99,7 +98,7 @@ public class Server {
         JSONObject jsonObject = new JSONObject(body);
         //System.out.println(jsonObject);
 
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Observation")
+        HttpResponse<JsonNode> response = Unirest.post(BASE_URL + "/Observation")
                 .header("content-type", "application/json")
                 .body(jsonObject)
                 .asJson();
@@ -141,7 +140,7 @@ public class Server {
         JSONObject jsonObject = new JSONObject(body);
         //System.out.println(jsonObject);
 
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Observation")
+        HttpResponse<JsonNode> response = Unirest.post(BASE_URL + "/Observation")
                 .header("content-type", "application/json")
                 .body(jsonObject)
                 .asJson();
@@ -157,9 +156,8 @@ public class Server {
         return obsID;
     }
 
-
     public ArrayList<String> getPatients() {
-        HttpResponse<JsonNode> request = Unirest.get("http://localhost:8080/Patient")
+        HttpResponse<JsonNode> request = Unirest.get(BASE_URL + "/Patient")
                 .asJson();
         JSONObject jsonObj = request.getBody().getObject();
         ArrayList<String> patientIDs = new ArrayList<>();
@@ -180,14 +178,13 @@ public class Server {
     }
 
     public ArrayList<Observation> getObservationsOfPatient(String patientID) {
-        HttpResponse<JsonNode> request = Unirest.get("http://localhost:8080/Observation?subject=" + patientID)
+        HttpResponse<JsonNode> request = Unirest.get(BASE_URL + "/Observation?subject=" + patientID)
                 .asJson();
         JSONObject jsonObj = request.getBody().getObject();
         ArrayList<Observation> observations = new ArrayList<>();
         JSONArray items = jsonObj.getJSONArray("entry");
 
         for (int i = 0; i < items.length(); i++) {
-
             JSONObject objects = items.getJSONObject(i);
             JSONObject resource = (JSONObject) objects.get("resource");
             String obsID = resource.getString("id");
