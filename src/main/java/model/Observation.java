@@ -8,8 +8,10 @@ public class Observation {
     private String unit;
     private String valueSystem;
     private String valueCode;
+    private String observationID;
 
     public Observation(String observationSystem, String observationCode, double numericalValue, String unit) {
+        this.observationID = observationID;
         this.observationSystem = observationSystem;
         this.observationCode = observationCode;
         this.numericalValue = numericalValue;
@@ -17,6 +19,7 @@ public class Observation {
     }
 
     public Observation(String observationSystem, String observationCode, String valueSystem, String valueCode) {
+        this.observationID = observationID;
         this.observationSystem = observationSystem;
         this.observationCode = observationCode;
         this.valueSystem = valueSystem;
@@ -71,4 +74,11 @@ public class Observation {
         this.valueCode = valueCode;
     }
 
+    public String getObservationID() {
+        return observationID;
+    }
+
+    public void setObservationID(String observationID) {
+        this.observationID = observationID;
+    }
 }

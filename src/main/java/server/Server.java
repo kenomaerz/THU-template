@@ -47,7 +47,6 @@ public class Server {
         return false;
     }
 
-    //todo
     public String createPatient(String lastname, String firstname, Gender gender) {
         System.out.println("TestConnection");
         HashMap<String, Object> body = new HashMap<>();
@@ -106,9 +105,9 @@ public class Server {
                 .body(jsonObject)
                 .asJson();
 
-        ArrayList allObservationIDs = getObservationsOfPatient(patientID);
-        String observationID = (String) allObservationIDs.get(allObservationIDs.size() - 1);
-        System.out.println(observationID);
+        ArrayList allObservations = getObservationsOfPatient(patientID);
+        Observation obs = (Observation) allObservations.get(allObservations.size() - 1);
+        String obsID = obs.getObservationID();
 
         System.out.println(response.getBody());
         System.out.println(response.getStatusText());
@@ -117,9 +116,9 @@ public class Server {
         return null;
     }
 
-    //todo
+
     public String createCategoricalObservation(Observation observation, String patientID) {
-        System.out.println("TestConnection");
+        //System.out.println("TestConnection");
         HashMap<String, Object> body = new HashMap<>();
         HashMap<String, Object> code = new HashMap<>();
         HashMap<String, Object> codings = new HashMap<>();
@@ -141,22 +140,22 @@ public class Server {
         codingsValue.put("code", observation.getValueCode());
 
         JSONObject jsonObject = new JSONObject(body);
-        System.out.println(jsonObject);
+        //System.out.println(jsonObject);
 
         HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/Observation")
                 .header("content-type", "application/json")
                 .body(jsonObject)
                 .asJson();
 
-        ArrayList allObservationIDs = getObservationsOfPatient(patientID);
-        String observationID = (String) allObservationIDs.get(allObservationIDs.size() - 1);
-        System.out.println(observationID);
+        ArrayList allObservations = getObservationsOfPatient(patientID);
+        Observation obs = (Observation) allObservations.get(allObservations.size() - 1);
+        String obsID = obs.getObservationID();
 
-        System.out.println(response.getBody());
-        System.out.println(response.getStatusText());
-        System.out.println(response.isSuccess());
-        System.out.println(response.getStatus());
-        return null;
+        //System.out.println(response.getBody());
+        //System.out.println(response.getStatusText());
+        //System.out.println(response.isSuccess());
+        //System.out.println(response.getStatus());
+        return obsID;
     }
 
 
@@ -193,6 +192,7 @@ public class Server {
 
             JSONObject objects = items.getJSONObject(i);
             JSONObject resource = (JSONObject) objects.get("resource");
+            String obsID = resource.getString("id");
             JSONObject code = (JSONObject) resource.get("code");
             JSONArray coding = code.getJSONArray("coding");
             JSONObject coding1 = coding.getJSONObject(0);
@@ -204,9 +204,9 @@ public class Server {
             String valSystem = valueCoding1.getString("system");
             String valCode = valueCoding1.getString("code");
             Observation observation = new Observation(obsSystem, obsCode, valSystem, valCode);
+            observation.setObservationID(obsID);
             observations.add(observation);
         }
-        System.out.println(observations.toString());
         System.out.println(request.getBody());
         System.out.println(request.getStatusText());
         System.out.println(request.isSuccess());
