@@ -28,9 +28,9 @@ public class ServerFHIR {
         }
     }
 
-    //todo
-   /* public boolean testConnection() {
-        System.out.println("TestConnection");
+
+    /*public boolean testConnection() {
+      /*  System.out.println("TestConnection");
         HttpResponse<JsonNode> response = Unirest.get(BASE_URL + "/metadata").asJson();
         int status = response.getStatus();
 
@@ -41,17 +41,15 @@ public class ServerFHIR {
             return true;
         }
         return false;
-    }*/
+       }*/
 
-    //todo
-    //String firstname, String lastname, Enumerations.AdministrativeGender gender
-    public String createPatient() {
+    public String createPatient(String firstname, String lastname, Enumerations.AdministrativeGender gender) {
         Patient newPatient = new Patient();
         newPatient
                 .addName()
-                .setFamily("Doe")
-                .addGiven("John");
-        newPatient.setGender(Enumerations.AdministrativeGender.MALE);
+                .setFamily(firstname)
+                .addGiven(lastname);
+        newPatient.setGender(gender);
 
         MethodOutcome patientOutcome = client
                 .create()
@@ -59,12 +57,12 @@ public class ServerFHIR {
                 .execute();
 
         ArrayList<String> allPatients = getPatients();
+        System.out.println(allPatients);
         String patientID = allPatients.get(allPatients.size() - 1);
         return patientID;
     }
 
     public String createNumericalObservation(ObservationModel observation, String patientID) {
-        patientID = "da4bdecf-7341-42ca-81d7-912de37d1399";
         Observation fhirObservation = new Observation();
 
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
@@ -74,16 +72,15 @@ public class ServerFHIR {
                 .create()
                 .resource(fhirObservation)
                 .execute();
-       // String observationId = observationOutcome.getId().getIdPart();
-       // System.out.println("Created numerical observation, got ID: " + observationId);
+        // String observationId = observationOutcome.getId().getIdPart();
+        // System.out.println("Created numerical observation, got ID: " + observationId);
 
         ArrayList<ObservationModel> allObservations = getObservationsOfPatient(patientID);
-        String observationID = allObservations.get(allObservations.size() - 1).getObservationID();
+        String observationID = allObservations.get(allObservations.size() - 1).getObservationID().split("http://surgipedia.sfb125.de/wiki/Observation/")[1];
         return observationID;
     }
 
     public String createCategoricalObservation(ObservationModel observation, String patientID) {
-        patientID = "da4bdecf-7341-42ca-81d7-912de37d1399";
         Observation fhirObservation = new Observation();
 
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
@@ -96,7 +93,7 @@ public class ServerFHIR {
         //String observationId = observationOutcome.getId().getIdPart();
         //System.out.println("Created categorical observation, got ID: " + observationId);
         ArrayList<ObservationModel> allObservations = getObservationsOfPatient(patientID);
-        String observationID = allObservations.get(allObservations.size() - 1).getObservationID();
+        String observationID = allObservations.get(allObservations.size() - 1).getObservationID().split("http://surgipedia.sfb125.de/wiki/Observation/")[1];
         return observationID;
     }
 
@@ -112,18 +109,14 @@ public class ServerFHIR {
         List<Bundle.BundleEntryComponent> entries = results.getEntry();
         for (int i = 0; i < entries.size(); i++) {
             String patientID = results.getEntry().get(i).getResource().getId().split("http://localhost:8080/Patient/")[1];
-            System.out.println(patientID);
+            allPatientIDs.add(patientID);
         }
-        System.out.println("All patients: ");
-        System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
-
-        System.out.println("AllpatientIDs " + allPatientIDs);
+       // System.out.println("All patients: ");
+       // System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
         return allPatientIDs;
     }
 
-    //todo
     public ArrayList<ObservationModel> getObservationsOfPatient(String patientID) {
-        patientID = "Patient/da4bdecf-7341-42ca-81d7-912de37d1399";
         org.hl7.fhir.r4.model.Bundle results = client
                 .search()
                 .forResource(Observation.class)
@@ -131,8 +124,8 @@ public class ServerFHIR {
                 .returnBundle(org.hl7.fhir.r4.model.Bundle.class)
                 .execute();
 
-        System.out.println("All observations: ");
-        System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
+        //System.out.println("All observations: ");
+        //System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
 
         ArrayList<ObservationModel> allObservations = new ArrayList<>();
         List<Bundle.BundleEntryComponent> entries = results.getEntry();

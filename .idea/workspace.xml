@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9b414a63-ea45-4e4e-bca6-12644c746c0f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/ServerFHIR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ServerFHIR.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -19,43 +20,22 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/server/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/server/ServerFHIR.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/model/ObservationModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+            <state relative-caret-position="20">
+              <caret line="95" column="155" selection-start-line="95" selection-start-column="155" selection-end-line="95" selection-end-column="155" />
               <folding>
-                <element signature="e#2336#2337#0" expanded="true" />
-                <element signature="e#2368#2369#0" expanded="true" />
-                <element signature="e#2418#2419#0" expanded="true" />
-                <element signature="e#2460#2461#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-42">
-              <caret line="40" column="11" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/server/ServerFHIR.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/server/ServerFHIRTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="70" column="67" selection-start-line="70" selection-start-column="67" selection-end-line="70" selection-end-column="67" />
+            <state relative-caret-position="416">
+              <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -84,6 +64,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>add</find>
+      <find>split</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -98,59 +79,17 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/server/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/ObservationModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/server/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/server/ServerFHIR.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/template.iml" />
-        <option value="$PROJECT_DIR$/.idea/compiler.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_konghq_unirest_java_4_0_0_RC1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_base_5_0_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_client_5_0_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_structures_r4_5_0_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ca_uhn_hapi_fhir_org_hl7_fhir_r4_5_0_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ca_uhn_hapi_fhir_org_hl7_fhir_utilities_5_0_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_7.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_7.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_3_4.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_failureaccess_1_0_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_28_2_jre.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_12.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_9.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_7.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_12.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_2_10_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_fhir_ucum_1_0_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_28.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_28.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__xpp3_xpp3_1_1_4c.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__xpp3_xpp3_xpath_1_1_4c.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/server/ServerFHIRTest.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1940" />
+    <option name="x" value="951" />
+    <option name="y" value="-9" />
+    <option name="width" value="978" />
     <option name="height" value="1060" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -250,9 +189,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.Main" />
+  <component name="RunManager" selected="JUnit.ServerFHIRTest.testGetAllObsForPatient">
+    <configuration name="ServerFHIRTest.testCreateCategoricalObs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="template" />
       <extension name="coverage">
         <pattern>
@@ -260,12 +198,15 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="server" />
+      <option name="MAIN_CLASS_NAME" value="server.ServerFHIRTest" />
+      <option name="METHOD_NAME" value="testCreateCategoricalObs" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerFHIR" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.ServerFHIR" />
+    <configuration name="ServerFHIRTest.testCreateNumericalObs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="template" />
       <extension name="coverage">
         <pattern>
@@ -273,14 +214,69 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="server" />
+      <option name="MAIN_CLASS_NAME" value="server.ServerFHIRTest" />
+      <option name="METHOD_NAME" value="testCreateNumericalObs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerFHIRTest.testCreatePatient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="server" />
+      <option name="MAIN_CLASS_NAME" value="server.ServerFHIRTest" />
+      <option name="METHOD_NAME" value="testCreatePatient" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerFHIRTest.testGetAllObsForPatient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="server" />
+      <option name="MAIN_CLASS_NAME" value="server.ServerFHIRTest" />
+      <option name="METHOD_NAME" value="testGetAllObsForPatient" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerFHIRTest.testGetAllPatients" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="server" />
+      <option name="MAIN_CLASS_NAME" value="server.ServerFHIRTest" />
+      <option name="METHOD_NAME" value="testGetAllPatients" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ServerFHIR" />
+        <item itemvalue="JUnit.ServerFHIRTest.testGetAllObsForPatient" />
+        <item itemvalue="JUnit.ServerFHIRTest.testGetAllPatients" />
+        <item itemvalue="JUnit.ServerFHIRTest.testCreateCategoricalObs" />
+        <item itemvalue="JUnit.ServerFHIRTest.testCreateNumericalObs" />
+        <item itemvalue="JUnit.ServerFHIRTest.testCreatePatient" />
       </list>
     </recent_temporary>
   </component>
@@ -294,12 +290,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617212347290</updated>
-      <workItem from="1617212351095" duration="7237000" />
+      <workItem from="1617212351095" duration="9183000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="ServerFHIRTest_testCreatePatient - 2021.03.31 at 21h 59m 00s.xml">
+      <configuration name="ServerFHIRTest.testCreatePatient" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testCreatePatient - 2021.03.31 at 21h 59m 39s.xml">
+      <configuration name="ServerFHIRTest.testCreatePatient" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testCreateNumericalObs - 2021.03.31 at 22h 00m 29s.xml">
+      <configuration name="ServerFHIRTest.testCreateNumericalObs" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testCreateNumericalObs - 2021.03.31 at 22h 01m 00s.xml">
+      <configuration name="ServerFHIRTest.testCreateNumericalObs" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testCreateNumericalObs - 2021.03.31 at 22h 02m 45s.xml">
+      <configuration name="ServerFHIRTest.testCreateNumericalObs" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testCreateCategoricalObs - 2021.03.31 at 22h 03m 01s.xml">
+      <configuration name="ServerFHIRTest.testCreateCategoricalObs" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testGetAllPatients - 2021.03.31 at 22h 04m 32s.xml">
+      <configuration name="ServerFHIRTest.testGetAllPatients" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testGetAllObsForPatient - 2021.03.31 at 22h 08m 24s.xml">
+      <configuration name="ServerFHIRTest.testGetAllObsForPatient" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testGetAllObsForPatient - 2021.03.31 at 22h 10m 17s.xml">
+      <configuration name="ServerFHIRTest.testGetAllObsForPatient" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerFHIRTest_testGetAllObsForPatient - 2021.03.31 at 22h 11m 46s.xml">
+      <configuration name="ServerFHIRTest.testGetAllObsForPatient" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7237000" />
+    <option name="totallyTimeSpent" value="9183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -310,17 +338,17 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.026845638" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1738255" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.06703911" />
+      <window_info anchor="bottom" id="Terminal" weight="0.75664335" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.80586594" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26256984" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -340,13 +368,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="76" column="12" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/org.hl7.fhir.r4/5.0.0/org.hl7.fhir.r4-5.0.0.jar!/org/hl7/fhir/r4/model/Observation.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -368,17 +389,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/server/ServerTest.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/org.hl7.fhir.r4/5.0.0/org.hl7.fhir.r4-5.0.0.jar!/org/hl7/fhir/r4/model/Resource.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/server/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        <state>
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -386,13 +400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-42">
           <caret line="40" column="11" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/org.hl7.fhir.r4/5.0.0/org.hl7.fhir.r4-5.0.0.jar!/org/hl7/fhir/r4/model/Resource.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -409,10 +416,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/server/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="76" column="12" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/server/ServerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/server/ServerFHIR.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="70" column="67" selection-start-line="70" selection-start-column="67" selection-end-line="70" selection-end-column="67" />
+        <state relative-caret-position="20">
+          <caret line="95" column="155" selection-start-line="95" selection-start-column="155" selection-end-line="95" selection-end-column="155" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/server/ServerFHIRTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
