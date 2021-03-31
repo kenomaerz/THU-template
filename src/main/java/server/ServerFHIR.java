@@ -63,38 +63,41 @@ public class ServerFHIR {
         return patientID;
     }
 
-    //todo
-    //Observation observation, String patientID
-    public String createNumericalObservation() {
-        Observation observation = new Observation();
+    public String createNumericalObservation(ObservationModel observation, String patientID) {
+        patientID = "da4bdecf-7341-42ca-81d7-912de37d1399";
+        Observation fhirObservation = new Observation();
 
-        observation.getCode().addCoding().setSystem("http://sfb125.de/ontology/ihCCApplicationOntology/").setCode("bilirubin_concentration");
-        observation.getSubject().setReference("Patient/da4bdecf-7341-42ca-81d7-912de37d1399");
-        observation.getValueQuantity().setValue(1).setUnit("mg/dl");
+        fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
+        fhirObservation.getSubject().setReference("Patient/" + patientID);
+        fhirObservation.getValueQuantity().setValue(observation.getNumericalValue()).setUnit(observation.getUnit());
         MethodOutcome observationOutcome = client
                 .create()
-                .resource(observation)
+                .resource(fhirObservation)
                 .execute();
-        String observationId = observationOutcome.getId().getIdPart();
-        System.out.println("Created numerical observation, got ID: " + observationId);
-        return null;
+       // String observationId = observationOutcome.getId().getIdPart();
+       // System.out.println("Created numerical observation, got ID: " + observationId);
+
+        ArrayList<ObservationModel> allObservations = getObservationsOfPatient(patientID);
+        String observationID = allObservations.get(allObservations.size() - 1).getObservationID();
+        return observationID;
     }
 
-    //todo
-    //Observation observation, String patientID
-    public String createCategoricalObservation() {
-        Observation observation = new Observation();
+    public String createCategoricalObservation(ObservationModel observation, String patientID) {
+        patientID = "da4bdecf-7341-42ca-81d7-912de37d1399";
+        Observation fhirObservation = new Observation();
 
-        observation.getCode().addCoding().setSystem("http://sfb125.de/ontology/ihCCApplicationOntology/").setCode("bilirubin_concentration");
-        observation.getSubject().setReference("Patient/da4bdecf-7341-42ca-81d7-912de37d1399");
-        observation.getValueCodeableConcept().addCoding().setSystem("http://sfb125.de/ontology/ihCCApplicationOntology/").setCode("cN1");
+        fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
+        fhirObservation.getSubject().setReference("Patient/" + patientID);
+        fhirObservation.getValueCodeableConcept().addCoding().setSystem(observation.getValueSystem()).setCode(observation.getValueCode());
         MethodOutcome observationOutcome = client
                 .create()
-                .resource(observation)
+                .resource(fhirObservation)
                 .execute();
-        String observationId = observationOutcome.getId().getIdPart();
-        System.out.println("Created categorical observation, got ID: " + observationId);
-        return null;
+        //String observationId = observationOutcome.getId().getIdPart();
+        //System.out.println("Created categorical observation, got ID: " + observationId);
+        ArrayList<ObservationModel> allObservations = getObservationsOfPatient(patientID);
+        String observationID = allObservations.get(allObservations.size() - 1).getObservationID();
+        return observationID;
     }
 
 
@@ -119,9 +122,8 @@ public class ServerFHIR {
     }
 
     //todo
-    //String patientID
-    public ArrayList<ObservationModel> getObservationsOfPatient() {
-        String patientID = "Patient/da4bdecf-7341-42ca-81d7-912de37d1399";
+    public ArrayList<ObservationModel> getObservationsOfPatient(String patientID) {
+        patientID = "Patient/da4bdecf-7341-42ca-81d7-912de37d1399";
         org.hl7.fhir.r4.model.Bundle results = client
                 .search()
                 .forResource(Observation.class)
