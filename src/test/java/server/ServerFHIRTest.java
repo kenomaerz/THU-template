@@ -37,7 +37,6 @@ public class ServerFHIRTest {
 
     @Test
     public void testCreatePatient() {
-        //ServerFHIR server = new ServerFHIR();
         String patientID = server.createPatient("Doe", "Jane", Enumerations.AdministrativeGender.FEMALE);
         assertEquals(36, patientID.length());
     }
@@ -48,7 +47,6 @@ public class ServerFHIRTest {
         String patientID = server.createPatient("Doe", "John", Enumerations.AdministrativeGender.MALE);
         String observationID = server.createNumericalObservation(observation, patientID);
         assertEquals(167, observationID.length());
-
     }
 
     @Test
