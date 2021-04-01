@@ -12,21 +12,17 @@ public class ObservationModel {
     private String patientID;
 
     public ObservationModel(String observationSystem, String observationCode, double numericalValue, String unit) {
-        this.observationID = observationID;
         this.observationSystem = observationSystem;
         this.observationCode = observationCode;
         this.numericalValue = numericalValue;
         this.unit = unit;
-        this.patientID = patientID;
     }
 
     public ObservationModel(String observationSystem, String observationCode, String valueSystem, String valueCode) {
-        this.observationID = observationID;
         this.observationSystem = observationSystem;
         this.observationCode = observationCode;
         this.valueSystem = valueSystem;
         this.valueCode = valueCode;
-        this.patientID = patientID;
     }
 
     public String getObservationSystem() {

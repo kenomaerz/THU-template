@@ -1,7 +1,6 @@
 package server;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import error.DuplicateServerException;
 import kong.unirest.HttpResponse;
@@ -52,8 +51,7 @@ public class Server {
                 .addGiven(lastname);
         newPatient.setGender(gender);
 
-        MethodOutcome patientOutcome = client
-                .create()
+        client.create()
                 .resource(newPatient)
                 .execute();
 
@@ -69,10 +67,9 @@ public class Server {
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
         fhirObservation.getSubject().setReference("Patient/" + patientID);
         fhirObservation.getValueQuantity().setValue(observation.getNumericalValue()).setUnit(observation.getUnit());
-        MethodOutcome observationOutcome = client
-                .create()
-                .resource(fhirObservation)
-                .execute();
+        client.create()
+              .resource(fhirObservation)
+              .execute();
 
         String observationID = getLastCreatedObservationForPatient(patientID);
         return observationID;
@@ -83,10 +80,9 @@ public class Server {
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
         fhirObservation.getSubject().setReference("Patient/" + patientID);
         fhirObservation.getValueCodeableConcept().addCoding().setSystem(observation.getValueSystem()).setCode(observation.getValueCode());
-        MethodOutcome observationOutcome = client
-                .create()
-                .resource(fhirObservation)
-                .execute();
+        client.create()
+              .resource(fhirObservation)
+              .execute();
 
         String observationID = getLastCreatedObservationForPatient(patientID);
         return observationID;
