@@ -1,7 +1,6 @@
 package server;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.rest.api.EncodingEnum;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import error.DuplicateServerException;
@@ -17,14 +16,14 @@ import org.hl7.fhir.r4.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServerFHIR {
+public class Server {
     private static final String BASE_URL = "http://localhost:8080/";
     private static int instances = 0;
     FhirContext ctx = FhirContext.forR4();
     IGenericClient client = ctx.newRestfulGenericClient(BASE_URL);
 
 
-    public ServerFHIR() {
+    public Server() {
         System.out.println("Constructing Server");
         instances++;
         if (instances > 1) {
@@ -32,11 +31,10 @@ public class ServerFHIR {
         }
     }
 
-
     public boolean testConnection() {
         System.out.println("TestConnection");
 
-       HttpResponse<JsonNode> response = Unirest.get(BASE_URL + "metadata").asJson();
+        HttpResponse<JsonNode> response = Unirest.get(BASE_URL + "metadata").asJson();
         int status = response.getStatus();
 
         System.out.println(response.getStatusText());
@@ -75,17 +73,13 @@ public class ServerFHIR {
                 .create()
                 .resource(fhirObservation)
                 .execute();
-        // String observationId = observationOutcome.getId().getIdPart();
-        // System.out.println("Created numerical observation, got ID: " + observationId);
 
-        ArrayList<ObservationModel> allObservations = getObservationsOfPatient(patientID);
-        String observationID = allObservations.get(allObservations.size() - 1).getObservationID().split("http://surgipedia.sfb125.de/wiki/Observation/")[1];
+        String observationID = getLastCreatedObservationForPatient(patientID);
         return observationID;
     }
 
     public String createCategoricalObservation(ObservationModel observation, String patientID) {
         Observation fhirObservation = new Observation();
-
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
         fhirObservation.getSubject().setReference("Patient/" + patientID);
         fhirObservation.getValueCodeableConcept().addCoding().setSystem(observation.getValueSystem()).setCode(observation.getValueCode());
@@ -93,13 +87,10 @@ public class ServerFHIR {
                 .create()
                 .resource(fhirObservation)
                 .execute();
-        //String observationId = observationOutcome.getId().getIdPart();
-        //System.out.println("Created categorical observation, got ID: " + observationId);
-        ArrayList<ObservationModel> allObservations = getObservationsOfPatient(patientID);
-        String observationID = allObservations.get(allObservations.size() - 1).getObservationID().split("http://surgipedia.sfb125.de/wiki/Observation/")[1];
+
+        String observationID = getLastCreatedObservationForPatient(patientID);
         return observationID;
     }
-
 
     public ArrayList<String> getPatients() {
         org.hl7.fhir.r4.model.Bundle results = client
@@ -114,8 +105,6 @@ public class ServerFHIR {
             String patientID = results.getEntry().get(i).getResource().getId().split("http://localhost:8080/Patient/")[1];
             allPatientIDs.add(patientID);
         }
-        // System.out.println("All patients: ");
-        // System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
         return allPatientIDs;
     }
 
@@ -126,9 +115,6 @@ public class ServerFHIR {
                 .where(Observation.SUBJECT.hasId(patientID))
                 .returnBundle(org.hl7.fhir.r4.model.Bundle.class)
                 .execute();
-
-        //System.out.println("All observations: ");
-        //System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
 
         ArrayList<ObservationModel> allObservations = new ArrayList<>();
         List<Bundle.BundleEntryComponent> entries = results.getEntry();
@@ -156,6 +142,12 @@ public class ServerFHIR {
             }
         }
         return allObservations;
+    }
+
+    public String getLastCreatedObservationForPatient(String patientID) {
+        ArrayList<ObservationModel> allObservations = getObservationsOfPatient(patientID);
+        String observationID = allObservations.get(allObservations.size() - 1).getObservationID().split("http://surgipedia.sfb125.de/wiki/Observation/")[1];
+        return observationID;
     }
 }
 
