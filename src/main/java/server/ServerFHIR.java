@@ -1,9 +1,13 @@
 package server;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.api.EncodingEnum;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import error.DuplicateServerException;
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
 import model.ObservationModel;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Enumerations;
@@ -14,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServerFHIR {
-
-    private static final String BASE_URL = "http://localhost:8080";
+    private static final String BASE_URL = "http://localhost:8080/";
     private static int instances = 0;
     FhirContext ctx = FhirContext.forR4();
     IGenericClient client = ctx.newRestfulGenericClient(BASE_URL);
+
 
     public ServerFHIR() {
         System.out.println("Constructing Server");
@@ -29,19 +33,18 @@ public class ServerFHIR {
     }
 
 
-    /*public boolean testConnection() {
-      /*  System.out.println("TestConnection");
-        HttpResponse<JsonNode> response = Unirest.get(BASE_URL + "/metadata").asJson();
+    public boolean testConnection() {
+        System.out.println("TestConnection");
+
+       HttpResponse<JsonNode> response = Unirest.get(BASE_URL + "metadata").asJson();
         int status = response.getStatus();
 
         System.out.println(response.getStatusText());
-        System.out.println(response.isSuccess());
-        System.out.println(response.getStatus());
         if (status == 200) {
             return true;
         }
         return false;
-       }*/
+    }
 
     public String createPatient(String firstname, String lastname, Enumerations.AdministrativeGender gender) {
         Patient newPatient = new Patient();
@@ -111,8 +114,8 @@ public class ServerFHIR {
             String patientID = results.getEntry().get(i).getResource().getId().split("http://localhost:8080/Patient/")[1];
             allPatientIDs.add(patientID);
         }
-       // System.out.println("All patients: ");
-       // System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
+        // System.out.println("All patients: ");
+        // System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(results));
         return allPatientIDs;
     }
 
