@@ -11,6 +11,8 @@ package error;
  */
 public class DuplicateServerException extends RuntimeException {
 	
+	private static final long serialVersionUID = 1L;
+
 	public DuplicateServerException(String reason) {
 		super(reason);
 	}
