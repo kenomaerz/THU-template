@@ -15,11 +15,13 @@ import org.hl7.fhir.r4.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.Config;
+
 public class Server {
-    private static final String BASE_URL = "http://localhost:8080/";
+    
     private static int instances = 0;
     FhirContext ctx = FhirContext.forR4();
-    IGenericClient client = ctx.newRestfulGenericClient(BASE_URL);
+    IGenericClient client = ctx.newRestfulGenericClient(Config.SERVER_BASE_URL);
 
 
     public Server() {
@@ -33,7 +35,7 @@ public class Server {
     public boolean testConnection() {
         System.out.println("TestConnection");
 
-        HttpResponse<JsonNode> response = Unirest.get(BASE_URL + "metadata").asJson();
+        HttpResponse<JsonNode> response = Unirest.get(Config.SERVER_BASE_URL + "metadata").asJson();
         int status = response.getStatus();
 
         System.out.println(response.getStatusText());
@@ -98,7 +100,7 @@ public class Server {
         ArrayList<String> allPatientIDs = new ArrayList<>();
         List<Bundle.BundleEntryComponent> entries = results.getEntry();
         for (int i = 0; i < entries.size(); i++) {
-            String patientID = results.getEntry().get(i).getResource().getId().split("http://localhost:8080/Patient/")[1];
+            String patientID = results.getEntry().get(i).getResource().getId().split(Config.SERVER_BASE_URL +  "Patient/")[1];
             allPatientIDs.add(patientID);
         }
         return allPatientIDs;
