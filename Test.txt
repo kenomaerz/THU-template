@@ -1,25 +1,25 @@
 Test
 Ihr kÃ¶nnt hier Sachen reinschreiben und schauen ob ihr commiten kÃ¶nnt
 wenn ihr wollt
-
+Stabil
 Ok bro
 
 
 
 Familiarize yourself with your topic
-•List open questions / unclear points
-•Distribute open questions to team members
-•Document answers
+ï¿½List open questions / unclear points
+ï¿½Distribute open questions to team members
+ï¿½Document answers
 
 Work Plan
 
-•Your project description is not super clear
-•That’s how it usually is :/
-•First step: Clarify your work packages!
+ï¿½Your project description is not super clear
+ï¿½Thatï¿½s how it usually is :/
+ï¿½First step: Clarify your work packages!
 
-•Create a work plan
-•Create a list of work packages that need to be done
-•Create larger topics and list small, well defined packages!
-•Maybe use a tool to manage work packages!
-•Trello, Meistertask, Githubissues...
-•Make an appointment with me and present your work plan (30 min)
+ï¿½Create a work plan
+ï¿½Create a list of work packages that need to be done
+ï¿½Create larger topics and list small, well defined packages!
+ï¿½Maybe use a tool to manage work packages!
+ï¿½Trello, Meistertask, Githubissues...
+ï¿½Make an appointment with me and present your work plan (30 min)
