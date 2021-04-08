@@ -24,7 +24,7 @@ package util;
  */
  
 public class Config_TEMP {
-	public static final String REDCAP_TOKEN = "";
-	public static final String REDCAP_API_URL = "";
+	public static final String REDCAP_TOKEN = "496E2DCCCD38136DD85E87863E5FB12B";
+	public static final String REDCAP_API_URL = "https://redcap.sdgc.de/api/";
 	public static final String SERVER_BASE_URL = "http://localhost:8080/";
 }
