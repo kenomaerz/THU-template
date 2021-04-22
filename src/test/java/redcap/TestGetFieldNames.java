@@ -21,7 +21,7 @@ import org.junit.Test;
 public class TestGetFieldNames {
 
 	@Test
-	public void TestGetData() {
+	public void Test() {
 		final List<NameValuePair> params;
 		final HttpPost post;
 		HttpResponse resp;
