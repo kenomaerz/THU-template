@@ -14,5 +14,3 @@ buildNumber.properties
 .project
 
 .classpath
-
-src/main/java/util/Config.java
