@@ -7,9 +7,9 @@ public class ReadCSV {
 	public static void main(String[] args) {
 
 		try {
-			Scanner scanner = new Scanner(new File("/Users/areejjumaa/Documents/DATA_2021-03-31_2145.csv"));
-			Scanner scanner2 = new Scanner(new File("/Users/areejjumaa/Documents/DataDictionary_2021-03-31.csv"));
-			Scanner scanner3 = new Scanner(new File("/Users/areejjumaa/Documents/ihCCOntology_Excerpt.csv"));
+			Scanner scanner = new Scanner(new File("./src/CSVData/DATA_2021-03-31_2145.csv"));
+			Scanner scanner2 = new Scanner(new File("./src/CSVData/DataDictionary_2021-03-31.csv"));
+			Scanner scanner3 = new Scanner(new File("./src/CSVData/ihCCOntology_Excerpt.csv"));
 
 			scanner.useDelimiter(",");
 			scanner2.useDelimiter(",");
