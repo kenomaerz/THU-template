@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Config;
+import util.ServerConfig;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -32,12 +32,12 @@ public class TestGetMetadata {
 		String line;
 
 		params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("token", Config.REDCAP_TOKEN));
+		params.add(new BasicNameValuePair("token", ServerConfig.REDCAP_TOKEN));
 		params.add(new BasicNameValuePair("content", "metadata"));
 	    params.add(new BasicNameValuePair("format", "json"));
 	    params.add(new BasicNameValuePair("returnFormat", "json"));
 
-	    post = new HttpPost(Config.REDCAP_API_URL);
+	    post = new HttpPost(ServerConfig.REDCAP_API_URL);
 	    post.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
 	    try

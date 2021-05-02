@@ -1,3 +1,4 @@
+
 package server;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -18,13 +19,13 @@ import org.hl7.fhir.r4.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Config;
+import util.ServerConfig;
 
 public class Server {
     
     private static int instances = 0;
     FhirContext ctx = FhirContext.forR4();
-    IGenericClient client = ctx.newRestfulGenericClient(Config.SERVER_BASE_URL);
+    IGenericClient client = ctx.newRestfulGenericClient(ServerConfig.SERVER_BASE_URL);
 
 
     public Server() {
@@ -38,7 +39,7 @@ public class Server {
     public boolean testConnection() {
         System.out.println("TestConnection");
 
-        HttpResponse<JsonNode> response = Unirest.get(Config.SERVER_BASE_URL + "metadata").asJson();
+        HttpResponse<JsonNode> response = Unirest.get(ServerConfig.SERVER_BASE_URL + "metadata").asJson();
         int status = response.getStatus();
 
         System.out.println(response.getStatusText());
@@ -96,7 +97,7 @@ public class Server {
         ArrayList<String> allPatientIDs = new ArrayList<>();
         List<Bundle.BundleEntryComponent> entries = results.getEntry();
         for (int i = 0; i < entries.size(); i++) {
-            String patientID = results.getEntry().get(i).getResource().getId().split(Config.SERVER_BASE_URL +  "Patient/")[1];
+            String patientID = results.getEntry().get(i).getResource().getId().split(ServerConfig.SERVER_BASE_URL +  "Patient/")[1];
             allPatientIDs.add(patientID);
         }
         return allPatientIDs;
