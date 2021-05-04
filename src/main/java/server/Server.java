@@ -1,4 +1,3 @@
-
 package server;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -8,24 +7,23 @@ import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import model.AbstractObservationModel;
+import model.BooleanObservationModel;
 import model.CategorialObservationModel;
 import model.NumericalObservationModel;
-
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Enumerations;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
+import util.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import util.ServerConfig;
-
 public class Server {
-    
+
     private static int instances = 0;
     FhirContext ctx = FhirContext.forR4();
-    IGenericClient client = ctx.newRestfulGenericClient(ServerConfig.SERVER_BASE_URL);
+    IGenericClient client = ctx.newRestfulGenericClient(Config.SERVER_BASE_URL);
 
 
     public Server() {
@@ -39,7 +37,7 @@ public class Server {
     public boolean testConnection() {
         System.out.println("TestConnection");
 
-        HttpResponse<JsonNode> response = Unirest.get(ServerConfig.SERVER_BASE_URL + "metadata").asJson();
+        HttpResponse<JsonNode> response = Unirest.get(Config.SERVER_BASE_URL + "metadata").asJson();
         int status = response.getStatus();
 
         System.out.println(response.getStatusText());
@@ -71,18 +69,23 @@ public class Server {
         Observation fhirObservation = new Observation();
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
         fhirObservation.getSubject().setReference("Patient/" + patientID);
-        
+
         if (observation instanceof NumericalObservationModel) {
-        	NumericalObservationModel numerical = (NumericalObservationModel) observation;
-        	fhirObservation.getValueQuantity().setValue(numerical.getNumericalValue()).setUnit(numerical.getUnit());
+            NumericalObservationModel numerical = (NumericalObservationModel) observation;
+            fhirObservation.getValueQuantity().setValue(numerical.getNumericalValue()).setUnit(numerical.getUnit());
+        } else if (observation instanceof CategorialObservationModel) {
+            CategorialObservationModel categorical = (CategorialObservationModel) observation;
+            fhirObservation.getValueCodeableConcept().addCoding().setSystem(categorical.getValueSystem()).setCode(categorical.getValueCode());
         } else {
-        	CategorialObservationModel categorical = (CategorialObservationModel) observation;
-        	fhirObservation.getValueCodeableConcept().addCoding().setSystem(categorical.getValueSystem()).setCode(categorical.getValueCode());
+            BooleanObservationModel bool = (BooleanObservationModel) observation;
+            System.out.println("Val sys" + bool.getValueSystem());
+            System.out.println("val vode" + bool.getValueCode());
+            fhirObservation.getValueCodeableConcept().addCoding().setSystem(bool.getValueSystem()).setCode(bool.getValueCode());
         }
-        
+
         client.create()
-              .resource(fhirObservation)
-              .execute();
+                .resource(fhirObservation)
+                .execute();
         String observationID = getLastCreatedObservationForPatient(patientID);
         return observationID;
     }
@@ -97,7 +100,7 @@ public class Server {
         ArrayList<String> allPatientIDs = new ArrayList<>();
         List<Bundle.BundleEntryComponent> entries = results.getEntry();
         for (int i = 0; i < entries.size(); i++) {
-            String patientID = results.getEntry().get(i).getResource().getId().split(ServerConfig.SERVER_BASE_URL +  "Patient/")[1];
+            String patientID = results.getEntry().get(i).getResource().getId().split(Config.SERVER_BASE_URL + "Patient/")[1];
             allPatientIDs.add(patientID);
         }
         return allPatientIDs;
@@ -130,10 +133,18 @@ public class Server {
             } else if (observationResource.hasValueCodeableConcept()) {
                 String valueSystem = observationResource.getValueCodeableConcept().getCoding().get(0).getSystem();
                 String valueCode = observationResource.getValueCodeableConcept().getCoding().get(0).getCode();
-                CategorialObservationModel observation = new CategorialObservationModel(observationSystem, observationCode, valueSystem, valueCode);
-                observation.setObservationID(observationID);
-                observation.setPatientID(patientID);
-                allObservations.add(observation);
+                if (valueCode.equals("true_value_specification") || valueCode.equals("false_value_specification")) {
+                    BooleanObservationModel observation = new BooleanObservationModel(observationSystem, observationCode, valueSystem, valueCode);
+                    observation.setObservationID(observationID);
+                    observation.setPatientID(patientID);
+                    allObservations.add(observation);
+                } else {
+                    CategorialObservationModel observation = new CategorialObservationModel(observationSystem, observationCode, valueSystem, valueCode);
+                    observation.setObservationID(observationID);
+                    observation.setPatientID(patientID);
+                    allObservations.add(observation);
+                }
+
             }
         }
         return allObservations;

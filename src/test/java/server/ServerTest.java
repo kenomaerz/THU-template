@@ -1,6 +1,7 @@
 package server;
 
 import model.AbstractObservationModel;
+import model.BooleanObservationModel;
 import model.CategorialObservationModel;
 import model.NumericalObservationModel;
 
@@ -41,6 +42,14 @@ public class ServerTest {
         String patientID = server.createPatient("Doe", "Jane", Enumerations.AdministrativeGender.FEMALE);
         String observationID = server.createObservation(observation, patientID);
         assertEquals(162, observationID.length());
+    }
+
+    @Test
+    public void testCreateBooleanObs() {
+        BooleanObservationModel observation = new BooleanObservationModel("http://sfb125.de/ontology/ihCCApplicationOntology/", "cirrhosis_observation", "http://sfb125.de/ontology/factorontology/", "false_value_specification");
+        String patientID = server.createPatient("Doe", "Jane", Enumerations.AdministrativeGender.FEMALE);
+        String observationID = server.createObservation(observation, patientID);
+        assertEquals(165, observationID.length());
     }
 
     @Test
