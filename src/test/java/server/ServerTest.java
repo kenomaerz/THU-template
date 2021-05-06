@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ServerTest {
     private static Server server;
@@ -30,26 +31,27 @@ public class ServerTest {
 
     @Test
     public void testCreateNumericalObs() {
-        NumericalObservationModel observation = new NumericalObservationModel("http://sfb125.de/ontology/ihCCApplicationOntology/", "bilirubin_concentration", 1, "mg/dl");
+        NumericalObservationModel observation = new NumericalObservationModel("http://sfb125.de/ontology/ihCCApplicationOntology/", "bilirubin_concentration", 1.123, "mg/dl");
         String patientID = server.createPatient("Doe", "John", Enumerations.AdministrativeGender.MALE);
-        String observationID = server.createObservation(observation, patientID);
-        assertEquals(167, observationID.length());
+        NumericalObservationModel newObservation = (NumericalObservationModel) server.createObservation(observation, patientID);
+        assertEquals (newObservation.getValue(), 1.123, 0.000001);
     }
 
     @Test
     public void testCreateCategoricalObs() {
         CategorialObservationModel observation = new CategorialObservationModel("http://sfb125.de/ontology/ihCCApplicationOntology/", "lymph_node_staging", "http://sfb125.de/ontology/ihCCApplicationOntology/", "cN1");
-        String patientID = server.createPatient("Doe", "Jane", Enumerations.AdministrativeGender.FEMALE);
-        String observationID = server.createObservation(observation, patientID);
-        assertEquals(162, observationID.length());
+        String patientID = server.createPatient("Doe", "Jane", Enumerations.AdministrativeGender.MALE);
+        CategorialObservationModel newObservation = (CategorialObservationModel) server.createObservation(observation, patientID);
+        assertEquals (newObservation.getValueCode(), "cN1");
+        assertEquals (newObservation.getValueSystem(), "http://sfb125.de/ontology/ihCCApplicationOntology/");
     }
 
     @Test
     public void testCreateBooleanObs() {
-        BooleanObservationModel observation = new BooleanObservationModel("http://sfb125.de/ontology/ihCCApplicationOntology/", "cirrhosis_observation", "http://sfb125.de/ontology/factorontology/", "false_value_specification");
+        BooleanObservationModel observation = new BooleanObservationModel("http://sfb125.de/ontology/ihCCApplicationOntology/", "cirrhosis_observation", true);
         String patientID = server.createPatient("Doe", "Jane", Enumerations.AdministrativeGender.FEMALE);
-        String observationID = server.createObservation(observation, patientID);
-        assertEquals(165, observationID.length());
+        BooleanObservationModel newObservation = (BooleanObservationModel) server.createObservation(observation, patientID);
+        assertTrue(newObservation.getValue());
     }
 
     @Test

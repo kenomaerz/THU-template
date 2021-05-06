@@ -65,14 +65,14 @@ public class Server {
         return patientID;
     }
 
-    public String createObservation(AbstractObservationModel observation, String patientID) {
+    public AbstractObservationModel createObservation(AbstractObservationModel observation, String patientID) {
         Observation fhirObservation = new Observation();
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
         fhirObservation.getSubject().setReference("Patient/" + patientID);
 
         if (observation instanceof NumericalObservationModel) {
             NumericalObservationModel numerical = (NumericalObservationModel) observation;
-            fhirObservation.getValueQuantity().setValue(numerical.getNumericalValue()).setUnit(numerical.getUnit());
+            fhirObservation.getValueQuantity().setValue(numerical.getValue()).setUnit(numerical.getUnit());
         } else if (observation instanceof CategorialObservationModel) {
             CategorialObservationModel categorical = (CategorialObservationModel) observation;
             fhirObservation.getValueCodeableConcept().addCoding().setSystem(categorical.getValueSystem()).setCode(categorical.getValueCode());
@@ -86,8 +86,8 @@ public class Server {
         client.create()
                 .resource(fhirObservation)
                 .execute();
-        String observationID = getLastCreatedObservationForPatient(patientID);
-        return observationID;
+        return getLastCreatedObservationForPatient(patientID);
+        
     }
 
     public ArrayList<String> getPatients() {
@@ -134,7 +134,8 @@ public class Server {
                 String valueSystem = observationResource.getValueCodeableConcept().getCoding().get(0).getSystem();
                 String valueCode = observationResource.getValueCodeableConcept().getCoding().get(0).getCode();
                 if (valueCode.equals("true_value_specification") || valueCode.equals("false_value_specification")) {
-                    BooleanObservationModel observation = new BooleanObservationModel(observationSystem, observationCode, valueSystem, valueCode);
+                    boolean value = valueCode.equals("true_value_specification");
+                	BooleanObservationModel observation = new BooleanObservationModel(observationSystem, observationCode, value);
                     observation.setObservationID(observationID);
                     observation.setPatientID(patientID);
                     allObservations.add(observation);
@@ -150,10 +151,9 @@ public class Server {
         return allObservations;
     }
 
-    public String getLastCreatedObservationForPatient(String patientID) {
+    public AbstractObservationModel getLastCreatedObservationForPatient(String patientID) {
         ArrayList<AbstractObservationModel> allObservations = getObservationsOfPatient(patientID);
-        String observationID = allObservations.get(allObservations.size() - 1).getObservationID().split("http://surgipedia.sfb125.de/wiki/Observation/")[1];
-        return observationID;
+        return allObservations.get(allObservations.size() - 1);
     }
 }
 

@@ -1,31 +1,27 @@
 package model;
 
-public class BooleanObservationModel extends AbstractObservationModel {
+import error.IllegalModelStateException;
 
-    private String valueSystem;
-    private String valueCode;
+public class BooleanObservationModel extends CategorialObservationModel {
 
 
-    public BooleanObservationModel(String observationSystem, String observationCode, String valueSystem, String valueCode) {
-        this.observationSystem = observationSystem;
-        this.observationCode = observationCode;
-        this.valueSystem = valueSystem;
-        this.valueCode = valueCode;
+    public BooleanObservationModel(String observationSystem, String observationCode, boolean value) {
+        super(observationSystem, observationCode, value);
     }
 
-    public String getValueSystem() {
-        return valueSystem;
+    public boolean getValue() {
+        if (valueCode.equals("true_value_specification")) {
+        	return true;
+        } else if (valueCode.equals("false_value_specification")) {
+        	return false;
+        } else throw new IllegalModelStateException("BooleanObservationModel has a valueCode that cannot be translated to a boolean value: " + this.valueCode);
     }
 
-    public void setValueSystem(String valueSystem) {
-        this.valueSystem = valueSystem;
-    }
-
-    public String getValueCode() {
-        return valueCode;
-    }
-
-    public void setValueCode(String valueCode) {
-        this.valueCode = valueCode;
+    public void setValue(boolean value) {
+        if (value) {
+        	this.valueCode = "true_value_specification";
+        } else {
+        	this.valueCode = "false_value_specification";
+        }
     }
 }
