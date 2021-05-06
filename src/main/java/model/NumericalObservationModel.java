@@ -12,11 +12,11 @@ public class NumericalObservationModel extends AbstractObservationModel {
         this.unit = unit;
     }
 
-    public double getNumericalValue() {
+    public double getValue() {
         return numericalValue;
     }
 
-    public void setNumericalValue(double numericalValue) {
+    public void setValue(double numericalValue) {
         this.numericalValue = numericalValue;
     }
 

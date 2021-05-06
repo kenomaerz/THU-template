@@ -7,21 +7,20 @@ import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import model.AbstractObservationModel;
+import model.BooleanObservationModel;
 import model.CategorialObservationModel;
 import model.NumericalObservationModel;
-
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Enumerations;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
+import util.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Config;
-
 public class Server {
-    
+
     private static int instances = 0;
     FhirContext ctx = FhirContext.forR4();
     IGenericClient client = ctx.newRestfulGenericClient(Config.SERVER_BASE_URL);
@@ -66,24 +65,29 @@ public class Server {
         return patientID;
     }
 
-    public String createObservation(AbstractObservationModel observation, String patientID) {
+    public AbstractObservationModel createObservation(AbstractObservationModel observation, String patientID) {
         Observation fhirObservation = new Observation();
         fhirObservation.getCode().addCoding().setSystem(observation.getObservationSystem()).setCode(observation.getObservationCode());
         fhirObservation.getSubject().setReference("Patient/" + patientID);
-        
+
         if (observation instanceof NumericalObservationModel) {
-        	NumericalObservationModel numerical = (NumericalObservationModel) observation;
-        	fhirObservation.getValueQuantity().setValue(numerical.getNumericalValue()).setUnit(numerical.getUnit());
+            NumericalObservationModel numerical = (NumericalObservationModel) observation;
+            fhirObservation.getValueQuantity().setValue(numerical.getValue()).setUnit(numerical.getUnit());
+        } else if (observation instanceof CategorialObservationModel) {
+            CategorialObservationModel categorical = (CategorialObservationModel) observation;
+            fhirObservation.getValueCodeableConcept().addCoding().setSystem(categorical.getValueSystem()).setCode(categorical.getValueCode());
         } else {
-        	CategorialObservationModel categorical = (CategorialObservationModel) observation;
-        	fhirObservation.getValueCodeableConcept().addCoding().setSystem(categorical.getValueSystem()).setCode(categorical.getValueCode());
+            BooleanObservationModel bool = (BooleanObservationModel) observation;
+            System.out.println("Val sys" + bool.getValueSystem());
+            System.out.println("val vode" + bool.getValueCode());
+            fhirObservation.getValueCodeableConcept().addCoding().setSystem(bool.getValueSystem()).setCode(bool.getValueCode());
         }
-        
+
         client.create()
-              .resource(fhirObservation)
-              .execute();
-        String observationID = getLastCreatedObservationForPatient(patientID);
-        return observationID;
+                .resource(fhirObservation)
+                .execute();
+        return getLastCreatedObservationForPatient(patientID);
+        
     }
 
     public ArrayList<String> getPatients() {
@@ -96,7 +100,7 @@ public class Server {
         ArrayList<String> allPatientIDs = new ArrayList<>();
         List<Bundle.BundleEntryComponent> entries = results.getEntry();
         for (int i = 0; i < entries.size(); i++) {
-            String patientID = results.getEntry().get(i).getResource().getId().split(Config.SERVER_BASE_URL +  "Patient/")[1];
+            String patientID = results.getEntry().get(i).getResource().getId().split(Config.SERVER_BASE_URL + "Patient/")[1];
             allPatientIDs.add(patientID);
         }
         return allPatientIDs;
@@ -129,19 +133,27 @@ public class Server {
             } else if (observationResource.hasValueCodeableConcept()) {
                 String valueSystem = observationResource.getValueCodeableConcept().getCoding().get(0).getSystem();
                 String valueCode = observationResource.getValueCodeableConcept().getCoding().get(0).getCode();
-                CategorialObservationModel observation = new CategorialObservationModel(observationSystem, observationCode, valueSystem, valueCode);
-                observation.setObservationID(observationID);
-                observation.setPatientID(patientID);
-                allObservations.add(observation);
+                if (valueCode.equals("true_value_specification") || valueCode.equals("false_value_specification")) {
+                    boolean value = valueCode.equals("true_value_specification");
+                	BooleanObservationModel observation = new BooleanObservationModel(observationSystem, observationCode, value);
+                    observation.setObservationID(observationID);
+                    observation.setPatientID(patientID);
+                    allObservations.add(observation);
+                } else {
+                    CategorialObservationModel observation = new CategorialObservationModel(observationSystem, observationCode, valueSystem, valueCode);
+                    observation.setObservationID(observationID);
+                    observation.setPatientID(patientID);
+                    allObservations.add(observation);
+                }
+
             }
         }
         return allObservations;
     }
 
-    public String getLastCreatedObservationForPatient(String patientID) {
+    public AbstractObservationModel getLastCreatedObservationForPatient(String patientID) {
         ArrayList<AbstractObservationModel> allObservations = getObservationsOfPatient(patientID);
-        String observationID = allObservations.get(allObservations.size() - 1).getObservationID().split("http://surgipedia.sfb125.de/wiki/Observation/")[1];
-        return observationID;
+        return allObservations.get(allObservations.size() - 1);
     }
 }
 
