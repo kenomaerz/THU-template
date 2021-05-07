@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class CSVReaderWithHeaderAutoDetection2 {
-    private static final String SAMPLE_CSV_FILE_PATH = "C:\\Users\\vybui\\eclipse-workspace\\readcsv\\src\\readcsv\\ihCCOntology_Excerpt (1).csv";
+    private static final String SAMPLE_CSV_FILE_PATH = "ihCCOntology_Excerp.csv";
 public static void main(String[] args) throws IOException {
 		
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
