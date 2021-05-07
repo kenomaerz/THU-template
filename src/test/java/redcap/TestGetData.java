@@ -21,7 +21,7 @@ import org.junit.Test;
 public class TestGetData {
 
 	@Test
-	public void TestGetData() {
+	public void Test() {
 		final List<NameValuePair> params;
 		final HttpPost post;
 		HttpResponse resp;
