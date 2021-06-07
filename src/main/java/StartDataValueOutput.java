@@ -29,7 +29,7 @@ public class StartDataValueOutput {
                  
                  lines.add(Arrays.asList(values));
              }
-
+             
              inputStream.close();
          }catch (FileNotFoundException e) {
              e.printStackTrace();
