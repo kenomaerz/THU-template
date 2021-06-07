@@ -1,10 +1,21 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.image.ColorModel;
+import java.io.File;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableModel;
 
 import view.ViewStyle;
 
@@ -18,7 +29,7 @@ public class PatientenView extends ViewStyle {
 	
 	public PatientenView(String userName) {
 		super(); 
-		setTitle("Universitätsklinikum DSM | Patientenakten");
+		setTitle("Universitï¿½tsklinikum DSM | Patientenakten");
 		setBounds(0, 0, 700, 600);
 		setLocationRelativeTo(null);
 		this.initalizeUserLabelAndTextField();
@@ -52,7 +63,7 @@ public class PatientenView extends ViewStyle {
 
 	
 	private void initializeBackButton() {
-		backButton = new JButton("zurück");
+		backButton = new JButton("zurï¿½ck");
 		backButton.setFont(BUTTON_FONT);
 		backButton.setBounds(50, 520, 89, 23);
 		this.contentPane.add(backButton);
@@ -79,7 +90,5 @@ public class PatientenView extends ViewStyle {
 	public JButton getsearchDataButton() {
 		return searchDataButton;
 	}
-	
-	
 	
 }

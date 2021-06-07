@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 
 import view.ViewStyle;
 
@@ -39,9 +40,11 @@ public class UserView extends ViewStyle {
 	public JButton getLogoutButton() {
 		return logoutButton;
 	}
-
+	
 	
 	public JButton getPatientenakteButton() {
 		return PatientenakteButton;
 	}
+	
+
 }
