@@ -1,16 +1,21 @@
 package view;
 
+
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import view.ViewStyle;
 
-public class UserView extends ViewStyle {
+public class UserView extends ViewStyle  {
 
 	private static final long serialVersionUID = 1L;
 	private JButton PatientenakteButton;  
 	private JButton logoutButton;
+	
 	
 	
 	public UserView(String userName) {
@@ -43,8 +48,13 @@ public class UserView extends ViewStyle {
 	
 	
 	public JButton getPatientenakteButton() {
-		return PatientenakteButton;
+		return PatientenakteButton;	}
+
+	
 	}
 	
+	
+		
+	
 
-}
+
