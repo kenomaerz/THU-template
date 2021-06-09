@@ -19,7 +19,8 @@ import util.Config;
 
 public class Server {
     
-    private static int instances = 0;
+    public static final char[] PatientID = null;
+	private static int instances = 0;
     FhirContext ctx = FhirContext.forR4();
     IGenericClient client = ctx.newRestfulGenericClient(Config.SERVER_BASE_URL);
 

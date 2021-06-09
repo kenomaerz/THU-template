@@ -88,4 +88,8 @@ public class ObservationModel {
     public void setPatientID(String patientID) {
         this.patientID = patientID;
     }
+    public String toString(){
+    	return  " observationSystem: " + this.observationSystem + " observationCode: " + this.observationCode + " valueSystem: " + this.valueSystem+ " valueCode: " + this.valueCode + "\n" ;
+    	
+   }
 }

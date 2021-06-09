@@ -3,16 +3,18 @@ package controller;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
+import model.ObservationModel;
 import server.Server;
 import view.PatientenView;
 import view.UserView;
 
 public class UserController extends Controller {
-
+	 Server s = new Server();
 	public UserController() {
 		setUserView();
 		setPatientenView();
@@ -48,10 +50,18 @@ public class UserController extends Controller {
 
 			public void actionPerformed(ActionEvent e) {
 				
-		//es soll eine Methode erstellt werden:
-		 Server s = new Server();
+		
+		 String result = "";
 		 String input = "" + PatientenView.getPatientenTextField().getText().toString();
 		 System.out.println(input);
+		 ArrayList<ObservationModel> observationArray = s.getObservationsOfPatient(input);
+		 
+		 for (int i = 0; i < observationArray.size(); i++) {
+		      System.out.println(observationArray.get(i).toString());
+			  result = result + observationArray.get(i).toString(); 
+		 }
+		 PatientenView.observation().setText(result);
+		 
 			}
 
 			private void setUserViewActionListener(UserView userView) {
