@@ -30,17 +30,18 @@ public class PatientenView extends ViewStyle {
 	private JButton searchDataButton; 
 	private JButton backButton;
 	private static JTextArea observation;
-	
+	private JButton PatientIDButton;
 	
 	public PatientenView(String userName) {
 		super(); 
-		setTitle("Universitätsklinikum DSM | Patientenakten");
+		setTitle("Universitätsklinikum DSM");
 		setBounds(0, 0, 700, 600);
 		setLocationRelativeTo(null);
 		this.initalizeUserLabelAndTextField();
 		this.initalizeObservation();
 		this.initializesearchPatientButton(); 
 		this.initializeBackButton();
+		this.initializePatientIDButton();
 		
 		
 	}
@@ -61,13 +62,13 @@ public class PatientenView extends ViewStyle {
 	}
 
 	private void initalizeUserLabelAndTextField() {
-		JLabel patientenLabel = new JLabel("Patienten ID:");
+		JLabel patientenLabel = new JLabel("Patient ID:");
 		patientenLabel.setFont(LABEL_FONT);
 		patientenLabel.setBounds(65, 35, 100, 25);
 		
 		patientenTextField = new JTextField();
 		patientenTextField.setFont(LABEL_FONT);
-		patientenTextField.setBounds(65, 60, 250, 25);
+		patientenTextField.setBounds(65, 60, 280, 25);
 		
 		
 		
@@ -81,15 +82,15 @@ public class PatientenView extends ViewStyle {
 	}
 	
 	private void initializesearchPatientButton() {
-		searchDataButton = new JButton("suchen");
+		searchDataButton = new JButton("search");
 		searchDataButton.setFont(BUTTON_FONT);
-		searchDataButton.setBounds(210, 88, 89, 23);
+		searchDataButton.setBounds(65, 88, 89, 23);
 		this.contentPane.add(searchDataButton);
 	}
 
 	
 	private void initializeBackButton() {
-		backButton = new JButton("zurück");
+		backButton = new JButton("back");
 		backButton.setFont(BUTTON_FONT);
 		backButton.setBounds(50, 520, 89, 23);
 		this.contentPane.add(backButton);
@@ -102,6 +103,12 @@ public class PatientenView extends ViewStyle {
 		userLabel.setBounds(75, 35, 300, 23);
 		this.contentPane.add(userLabel); 
 }
+	private void initializePatientIDButton() {
+		PatientIDButton = new JButton("Patient IDs");
+		PatientIDButton.setFont(BUTTON_FONT);
+		PatientIDButton.setBounds(230, 88, 115, 23);
+		this.contentPane.add(PatientIDButton);
+	}
 
 
 	
@@ -120,4 +127,8 @@ public class PatientenView extends ViewStyle {
 		
 		return observation;
 	}
+	public JButton getPatientIDButton() {
+		return PatientIDButton;
+	}
+	
 }

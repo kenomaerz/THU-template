@@ -21,14 +21,14 @@ public class UserView extends ViewStyle  {
 	public UserView(String userName) {
 		super();
 		setLocationRelativeTo(null);  
-		setTitle("Willkommen " + userName);
+		setTitle("Welcome " + userName);
 		this.initializePatientenakteButton();
 		this.initializeLogoutButton();
 
 	}
 
 	private void initializePatientenakteButton() {
-		PatientenakteButton = new JButton("Patientenakten");
+		PatientenakteButton = new JButton("Patient documents");
 		PatientenakteButton.setFont(BUTTON_FONT);
 		PatientenakteButton.setBounds(110, 100, 160, 30);
 		this.contentPane.add(PatientenakteButton);

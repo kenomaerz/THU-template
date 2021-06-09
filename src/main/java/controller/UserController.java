@@ -44,6 +44,29 @@ public class UserController extends Controller {
 			}
 
 		});
+		JButton PatientIDButton = patientenView.getPatientIDButton();
+
+		PatientIDButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+		
+		 String result = "";
+		 
+		 
+		 ArrayList<String> PatientIDArray = s.getPatients();
+		 if(PatientIDArray.size() == 0) {
+			 PatientenView.observation().setText("No Patient IDs can be found");
+		 }else {
+		 for (int i = 0; i < PatientIDArray.size(); i++) {
+		      System.out.println(PatientIDArray.get(i));
+			  result = result + PatientIDArray.get(i)+"\n"; 
+		 }
+		 PatientenView.observation().setText(result);
+		 
+			}
+			}
+		});
 		JButton searchDataButton = patientenView.getsearchDataButton();
 
 		searchDataButton.addActionListener(new ActionListener() {
@@ -56,14 +79,18 @@ public class UserController extends Controller {
 		 System.out.println(input);
 		 ArrayList<ObservationModel> observationArray = s.getObservationsOfPatient(input);
 		 
+		 if(observationArray.size() == 0) {
+			 PatientenView.observation().setText("No observations can be found for this patient");
+		 }else {
+			 
 		 for (int i = 0; i < observationArray.size(); i++) {
 		      System.out.println(observationArray.get(i).toString());
 			  result = result + observationArray.get(i).toString(); 
 		 }
 		 PatientenView.observation().setText(result);
-		 
+		 }
 			}
-
+			
 			private void setUserViewActionListener(UserView userView) {
 				JButton PatientenakteButton = userView.getPatientenakteButton();
 

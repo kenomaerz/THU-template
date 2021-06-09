@@ -18,7 +18,7 @@ public class Login extends ViewStyle {
 
 	public Login() {
 		super();
-		setTitle("Willkommen | Login"); 
+		setTitle("Welcome | Login"); 
 		this.initalizeUserLabelAndTextField();
 		this.initializePasswordLabelAndTextField();
 		this.initializeLoginButton();
@@ -49,7 +49,7 @@ public class Login extends ViewStyle {
 	}
 	
 	private void initializePasswordLabelAndTextField() {	
-		JLabel passwordLabel = new JLabel("Passwort:");
+		JLabel passwordLabel = new JLabel("Password:");
 		passwordLabel.setFont(LABEL_FONT);
 		passwordLabel.setBounds(65, 124, 73, 23);
 		
