@@ -1,13 +1,16 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.image.ColorModel;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -31,7 +34,7 @@ public class PatientenView extends ViewStyle {
 	
 	public PatientenView(String userName) {
 		super(); 
-		setTitle("Universitï¿½tsklinikum DSM | Patientenakten");
+		setTitle("Universitätsklinikum DSM | Patientenakten");
 		setBounds(0, 0, 700, 600);
 		setLocationRelativeTo(null);
 		this.initalizeUserLabelAndTextField();
@@ -44,11 +47,17 @@ public class PatientenView extends ViewStyle {
 	
 	private void initalizeObservation() {
 		
-		observation = new JTextArea();
-		observation.setFont(LABEL_FONT);
-		observation.setBounds(250, 250, 500, 500);
-		observation= new JTextArea("Patientendaten: ");
+		observation = new JTextArea(5, 20);
+		observation.setBounds(120, 150, 400, 300);
+		observation.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+		observation.setEditable(false);
+		observation.setBackground(Color.LIGHT_GRAY);
+		JScrollPane scrollPane = new JScrollPane(observation);
+		
+		
 		this.contentPane.add(observation);
+		
+		
 	}
 
 	private void initalizeUserLabelAndTextField() {
@@ -65,7 +74,6 @@ public class PatientenView extends ViewStyle {
 		this.contentPane.add(patientenLabel);
 		this.contentPane.add(patientenTextField);
 		
-		//this.setContentPane(searchDataButton);
 	
 //		JLabel border = new JLabel("________________________________________________________________________________");
 //		border.setBounds(65, 100, 2000, 30);
@@ -81,7 +89,7 @@ public class PatientenView extends ViewStyle {
 
 	
 	private void initializeBackButton() {
-		backButton = new JButton("zurï¿½ck");
+		backButton = new JButton("zurück");
 		backButton.setFont(BUTTON_FONT);
 		backButton.setBounds(50, 520, 89, 23);
 		this.contentPane.add(backButton);
