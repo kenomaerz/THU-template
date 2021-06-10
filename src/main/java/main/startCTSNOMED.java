@@ -22,7 +22,9 @@ public class startCTSNOMED {
 	public static void main(String[] args) {
 
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
+				
 				try {
 				
 					System.out.println("MAIN");
