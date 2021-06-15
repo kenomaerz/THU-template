@@ -46,7 +46,7 @@ public class CTmodel {
 		}
 	}
 
-	public void ctDescriptions(String term) throws IOException, UnirestException {
+	public void ctDescriptions(String term, String finding) throws IOException, UnirestException {
 
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
 				.queryString("term", "age")
