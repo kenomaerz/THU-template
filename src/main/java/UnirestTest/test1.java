@@ -9,17 +9,20 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.*;
 
 public class test1 {
-	
 	public static void main(String[] args) throws UnirestException {
 
-		String body = Unirest.get("https://snowstorm.test-nictiz.nl/MAIN/concepts?activeFilter=true")
-				.queryString("term", Arrays.asList("age"))
-				.queryString("termActive", "true")
-				.queryString("offset", "0")
-				.queryString("limit", "10")
+//		String body = Unirest.get("https://snowstorm.test-nictiz.nl/MAIN/concepts?activeFilter=true")
+//				.queryString("term", Arrays.asList("age"))
+//				.queryString("termActive", "true")
+				
+
+				String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
+						.queryString("term", "age")
+						.queryString("semanticTag", "finding")
+	
 				
 				//900000000000003001 (FSN)
-				.queryString("descriptionType", "900000000000003001")
+//				.queryString("descriptionType", "900000000000003001")
 				
 //				.queryString("active", "true")
 //				.queryString("conceptActive", "true")
@@ -40,14 +43,21 @@ public class test1 {
 		JSONObject obj = new JSONObject(jsonString);
 		JSONArray arr = obj.getJSONArray("items");
 		
+//		for (int i = 0; i < arr.length(); i++) {
+//			
+//			String concept_id = arr.getJSONObject(i).getString("conceptId");
+//			JSONObject pt = arr.getJSONObject(i).getJSONObject("pt");
+//			JSONObject fsn = arr.getJSONObject(i).getJSONObject("fsn");
+//			
+//			System.out.println(i+1+". " + "\tConcept ID: " + concept_id + "\n\tPrefered name: " + pt.get("term") + "\n\tFully specified name: " + fsn.get("term") +"\n ");
+//			
+//		}
 		for (int i = 0; i < arr.length(); i++) {
-			
-			String concept_id = arr.getJSONObject(i).getString("conceptId");
-			JSONObject pt = arr.getJSONObject(i).getJSONObject("pt");
-			JSONObject fsn = arr.getJSONObject(i).getJSONObject("fsn");
-			
-			System.out.println(i+1+". " + "\tConcept ID: " + concept_id + "\n\tPrefered name: " + pt.get("term") + "\n\tFully specified name: " + fsn.get("term") +"\n ");
-			
-		}
+            String termCT = arr.getJSONObject(i).getString("term");
+           // JSONObject concept_id = arr.getJSONObject(i).getJSONObject("conceptId");
+//            JSONObject pt = arr.getJSONObject(i).getJSONObject("pt");
+//            JSONObject fsn = arr.getJSONObject(i).getJSONObject("fsn");
+            System.out.println(i + 1 + ". " + "\tTerm: " + termCT  + "\n ");
+        }
 	}
 }
