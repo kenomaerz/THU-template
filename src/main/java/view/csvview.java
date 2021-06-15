@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +22,10 @@ public class csvview extends JFrame {
 
 	public csvview() {
 
+//		Scanner scanner = new Scanner(new InputStreamReader(System.in));
+//		System.out.print("Begriff eingeben: ");
+//		String input = scanner.nextLine();
+		
 	}
 
 	// addActionListener & get-/set-Methoden

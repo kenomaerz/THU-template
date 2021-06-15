@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import modelCTSNOMED.CTmodel;
 
 public class ctcontroller {
@@ -20,7 +23,7 @@ public class ctcontroller {
 	private CTmodel ctmodel;
 
 	// constructor - Controller
-	public ctcontroller() throws IOException {
+	public ctcontroller() throws IOException, UnirestException {
 
 		// create hashmaps for view and models
 		HashMap<String, JFrame> views = new HashMap<String, JFrame>();
@@ -32,7 +35,7 @@ public class ctcontroller {
 
 		try {
 
-			ctmodel.ct("age");
+			ctmodel.ct("liver");
 
 		} catch (NullPointerException npe) {
 

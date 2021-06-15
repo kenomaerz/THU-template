@@ -3,51 +3,44 @@ package modelCTSNOMED;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class CTmodel {
-	
-	private static final String SAMPLE_CSV_FILE_PATH = "ihCCOntology.csv";
-	
-	public void ct() throws IOException {
+
+	public void ct(String term) throws IOException, UnirestException {
 		
-		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		String body = Unirest.get("https://snowstorm.test-nictiz.nl/MAIN/concepts?activeFilter=true")
+				.queryString("term", Arrays.asList(term)).queryString("termActive", "true").queryString("offset", "0")
+				.queryString("limit", "10").asString().getBody();
 
-		try (
+		String jsonString = body;
+		JSONObject obj = new JSONObject(jsonString);
+		JSONArray arr = obj.getJSONArray("items");
 
-				Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
-				CSVParser csvParser = new CSVParser(reader,
-						CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
-			
-			for (CSVRecord csvRecord : csvParser) {
-				// Accessing values by Header names
-				String parametername = csvRecord.get("Parametername");
-				String IRI = csvRecord.get("IRI");
-				String measurementType = csvRecord.get("Measurement-type");
+		for (int i = 0; i < arr.length(); i++) {
 
-				// Create an empty hash map
-		       
-		        map.put(parametername, " ");
-		        
-//				System.out.println("Record No - " + csvRecord.getRecordNumber());
-//				System.out.println("---------------");
-//				System.out.println("Parametername : " + parametername);
-//				System.out.println("IRI : " + IRI);
-//				System.out.println("Measurement-type : " + measurementType);
-//				System.out.println("---------------\n\n");
-			}
-		
-			// Print size and content
-	        System.out.println("Size of map is: "+ map.size());
-	        System.out.println(map);
-			}
+			String concept_id = arr.getJSONObject(i).getString("conceptId");
+			JSONObject pt = arr.getJSONObject(i).getJSONObject("pt");
+			JSONObject fsn = arr.getJSONObject(i).getJSONObject("fsn");
+
+			System.out.println(i + 1 + ". " + "\tConcept ID: " + concept_id + "\n\tPrefered name: " + pt.get("term")
+					+ "\n\tFully specified name: " + fsn.get("term") + "\n ");
+
 		}
+	}
 }
 //  https://www.callicoder.com/java-read-write-csv-file-apache-commons-csv/
 //	http://commons.apache.org/proper/commons-csv/download_csv.cgi
