@@ -20,11 +20,15 @@ import java.util.LinkedHashMap;
 
 public class CTmodel {
 
-	public void ct(String term) throws IOException, UnirestException {
-		
+	public void ctConcepts(String term) throws IOException, UnirestException {
+
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/MAIN/concepts?activeFilter=true")
-				.queryString("term", Arrays.asList(term)).queryString("termActive", "true").queryString("offset", "0")
-				.queryString("limit", "10").asString().getBody();
+				.queryString("term", Arrays.asList(term))
+				.queryString("termActive", "true")
+				.queryString("offset", "0")
+				.queryString("limit", "10")
+				.asString()
+				.getBody();
 
 		String jsonString = body;
 		JSONObject obj = new JSONObject(jsonString);
@@ -40,6 +44,27 @@ public class CTmodel {
 					+ "\n\tFully specified name: " + fsn.get("term") + "\n ");
 
 		}
+	}
+
+	public void ctDescriptions(String term) throws IOException, UnirestException {
+
+		String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
+				.queryString("term", "age")
+				.queryString("semanticTag", "finding")
+				.queryString("limit", "10")
+				.asString()
+				.getBody();
+
+		String jsonString = body;
+		JSONObject obj = new JSONObject(jsonString);
+		JSONArray arr = obj.getJSONArray("items");
+
+		for (int i = 0; i < arr.length(); i++) {
+			String termCT = arr.getJSONObject(i).getString("term");
+			System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n ");
+
+		}
+
 	}
 }
 //  https://www.callicoder.com/java-read-write-csv-file-apache-commons-csv/
