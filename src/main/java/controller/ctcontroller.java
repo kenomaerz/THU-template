@@ -13,27 +13,26 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelCTSNOMED.CTmodel;
 
-import model1.model1;
+public class ctcontroller {
 
-public class csvcontroller {
-
-	private model1 csvmodel;
+	private CTmodel ctmodel;
 
 	// constructor - Controller
-	public csvcontroller() throws IOException {
+	public ctcontroller() throws IOException {
 
 		// create hashmaps for view and models
 		HashMap<String, JFrame> views = new HashMap<String, JFrame>();
 		HashMap<String, Object> models = new HashMap<String, Object>();
 		System.out.println("created hashmaps for View and Models");
 
-		csvmodel = new model1();
-		models.put("model1", csvmodel);
+		ctmodel = new CTmodel();
+		models.put("ctmodel",ctmodel);
 
 		try {
 
-			csvmodel.csv();
+			ctmodel.ct("age");
 
 		} catch (NullPointerException npe) {
 

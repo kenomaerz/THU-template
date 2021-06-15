@@ -12,7 +12,7 @@ import java.awt.EventQueue;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
-import controller.csvcontroller;
+import controller.ctcontroller;
 
 //import model1.model1;
 //import view.csvview;
@@ -29,7 +29,7 @@ public class startCTSNOMED {
 				
 					System.out.println("MAIN");
 					// call csvcontroller
-					new csvcontroller();
+					new ctcontroller();
 					
 				} catch (Exception e) {
 					e.printStackTrace();

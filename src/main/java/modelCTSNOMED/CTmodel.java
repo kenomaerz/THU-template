@@ -11,11 +11,11 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class model1 {
+public class CTmodel {
 	
 	private static final String SAMPLE_CSV_FILE_PATH = "ihCCOntology.csv";
 	
-	public void csv() throws IOException {
+	public void ct() throws IOException {
 		
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
