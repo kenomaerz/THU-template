@@ -1,8 +1,5 @@
 package modelCTSNOMED;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -46,11 +43,11 @@ public class CTmodel {
 		}
 	}
 
-	public void ctDescriptions(String term, String finding) throws IOException, UnirestException {
+	public void ctDescriptions(String term, String semanticTag) throws IOException, UnirestException {
 
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
-				.queryString("term", "age")
-				.queryString("semanticTag", "finding")
+				.queryString("term", Arrays.asList(term))
+				.queryString("semanticTag", Arrays.asList(semanticTag))
 				.queryString("limit", "10")
 				.asString()
 				.getBody();
@@ -60,12 +57,14 @@ public class CTmodel {
 		JSONArray arr = obj.getJSONArray("items");
 
 		for (int i = 0; i < arr.length(); i++) {
+			
 			String termCT = arr.getJSONObject(i).getString("term");
-			System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n ");
+			JSONObject concept_id = arr.getJSONObject(i).getJSONObject("concept");
+			System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
 
 		}
 
 	}
 }
-//  https://www.callicoder.com/java-read-write-csv-file-apache-commons-csv/
-//	http://commons.apache.org/proper/commons-csv/download_csv.cgi
+//Link:
+//http://kong.github.io/unirest-java/#requests

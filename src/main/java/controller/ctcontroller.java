@@ -35,8 +35,8 @@ public class ctcontroller {
 
 		try {
 
-			ctmodel.ctConcepts("liver");
-			ctmodel.ctDescriptions("liver","finding");
+			ctmodel.ctConcepts("age");
+			ctmodel.ctDescriptions("age","finding");
 
 		} catch (NullPointerException npe) {
 
