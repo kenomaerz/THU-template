@@ -4,6 +4,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -52,10 +53,14 @@ public class UserController extends Controller {
 				
 		
 		 String result = "";
+		try { 
 		 
+		
+		ArrayList<String> PatientIDArray = s.getPatients();
 		 
-		 ArrayList<String> PatientIDArray = s.getPatients();
-		 if(PatientIDArray.size() == 0) {
+		// ArrayList<String> PatientIDArray = new ArrayList<>(Arrays.asList("Buenos Aires", "Córdoba", "La Plata")); 
+		 
+					 if(PatientIDArray.size() == 0) {
 			 PatientenView.observation().setText("No Patient IDs can be found");
 		 }else {
 		 for (int i = 0; i < PatientIDArray.size(); i++) {
@@ -66,7 +71,13 @@ public class UserController extends Controller {
 		 
 			}
 			}
-		});
+		
+		// add catch
+		
+			 catch(Exception e1) { 
+				 System.out.println("Cannot Connect to the Server");  
+			 }
+		}});
 		JButton searchDataButton = patientenView.getsearchDataButton();
 
 		searchDataButton.addActionListener(new ActionListener() {
@@ -77,6 +88,11 @@ public class UserController extends Controller {
 		 String result = "";
 		 String input = "" + PatientenView.getPatientenTextField().getText().toString();
 		 System.out.println(input);
+		
+		 
+		 
+		 try {
+		 
 		 ArrayList<ObservationModel> observationArray = s.getObservationsOfPatient(input);
 		 
 		 if(observationArray.size() == 0) {
@@ -88,8 +104,14 @@ public class UserController extends Controller {
 			  result = result + observationArray.get(i).toString(); 
 		 }
 		 PatientenView.observation().setText(result);
+		 }}
+		 
+		 catch(Exception e1) { 
+			 System.out.println("Cannot Search in the Server");  
 		 }
 			}
+			
+			
 			
 			private void setUserViewActionListener(UserView userView) {
 				JButton PatientenakteButton = userView.getPatientenakteButton();

@@ -1,4 +1,5 @@
 import java.util.List;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ public class StartDataValueOutput {
 
 	public static void main(String[] args) {
 		Controller controller = new Controller();
-		
  		controller.start();
+ 		
  		
  		String fileName= "./src/CSVData/DATA_2021-03-31_2145.csv";
  		File file= new File(fileName);
