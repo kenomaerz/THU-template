@@ -1,49 +1,50 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import modelCTSNOMED.CTmodel;
+import view.CTView;
 
 public class ctcontroller {
 
-	private CTmodel ctmodel;
-
-	// constructor - Controller
-	public ctcontroller() throws IOException, UnirestException {
-
-		// create hashmaps for view and models
-		HashMap<String, JFrame> views = new HashMap<String, JFrame>();
-		HashMap<String, Object> models = new HashMap<String, Object>();
-		System.out.println("created hashmaps for View and Models");
-
-		ctmodel = new CTmodel();
-		models.put("ctmodel",ctmodel);
-
+	private CTmodel model;
+	private CTView view;
+	
+	public ctcontroller(CTmodel model, CTView view) {
+		this.model = model;
+		this.view = view;
+	}
+	
+	public void setView(CTView view) {
+		this.view = view;
+	}
+	
+	public void showTerm(String term, String semanticTag, int limit) {
 		try {
-
-			ctmodel.ctConcepts("age");
-			ctmodel.ctDescriptions("age","finding");
-
-		} catch (NullPointerException npe) {
-
-			System.err.println("NO");
-
+			model.ctDescriptions(term, semanticTag, limit);
+			view.printDescriptions(model.getDescriptions());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+	}
+	
+	public void showSemanticTags() {
+		try {
+			model.ctSemanticTags();
+			view.printSemanticTags(model.getSemanticTags());
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveToFile() {
+		//ToDo: Informationen aus Model holen + in Datei schreiben (siehe: Datei.java)
 	}
 
 }
