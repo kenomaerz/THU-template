@@ -17,10 +17,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import java.io.File;
+import java.io.FileWriter;
 
 
-
-public class CTmodel {
+public class CTmodel2 {
 
 	
 	
@@ -53,7 +54,8 @@ public class CTmodel {
 
 	public void ctDescriptions(String term, String semanticTag) throws IOException, UnirestException {
 		
-		
+		FileWriter writer;
+		File datei = new File ("Concept.txt");
 		
 
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
@@ -73,7 +75,20 @@ public class CTmodel {
 			JSONObject concept_id = arr.getJSONObject(i).getJSONObject("concept");
 			System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
 			
-	
+		
+			
+			try {
+				writer = new FileWriter(datei, true);
+				writer.write(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
+				//writer.write(System.getProperty("line.separator"));
+				
+				writer.flush();
+				writer.close();
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
 		}
 		
