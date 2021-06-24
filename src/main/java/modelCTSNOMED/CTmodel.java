@@ -6,25 +6,25 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
-
-
-
+import java.util.LinkedList;
+import java.util.List;
 
 public class CTmodel {
+	
+	private List<CTDescription> descriptions;
+	private ArrayList<String> semanticTags;
 
-	
-	
-	
+
 	public void ctConcepts(String term) throws IOException, UnirestException {
 
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/MAIN/concepts?activeFilter=true")
@@ -51,15 +51,12 @@ public class CTmodel {
 		}
 	}
 
-	public void ctDescriptions(String term, String semanticTag) throws IOException, UnirestException {
-		
-		
-		
-
+	public void ctDescriptions(String term, String semanticTag, int limit) throws IOException, UnirestException {
+		descriptions = new ArrayList<CTDescription>();
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
 				.queryString("term", Arrays.asList(term))
 				.queryString("semanticTag", Arrays.asList(semanticTag))
-				.queryString("limit", "10")
+				.queryString("limit", Integer.toString(limit))
 				.asString()
 				.getBody();
 
@@ -71,16 +68,53 @@ public class CTmodel {
 			
 			String termCT = arr.getJSONObject(i).getString("term");
 			JSONObject concept_id = arr.getJSONObject(i).getJSONObject("concept");
-			System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
-			
-	
+			descriptions.add(new CTDescription(termCT, concept_id.getString("conceptId")));
+			//System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
 
 		}
-		
-		
-		
 
+	}
+	
+	public void ctSemanticTags() throws UnirestException {
+		semanticTags = new ArrayList<String>();
+		
+		String body = Unirest.get("https://snowstorm.test-nictiz.nl/MAIN/descriptions/semantictags").asString().getBody();
+
+		String jsonString = body;
+		JSONObject obj = new JSONObject(jsonString);
+		JSONArray arr = obj.names();
+		for (int i = 0; i < arr.length(); i++) {
+			semanticTags.add(arr.getString(i));
+		}
+	}
+	
+	public List<CTDescription> getDescriptions() {
+		return descriptions;
+	}
+	
+	public List<String> getSemanticTags() {
+		return semanticTags;
+	}
+	
+	public static class CTDescription {		
+		//ToDo: add fields as required
+		private String term;
+		private String conceptId;
+		
+		public CTDescription(String term, String conceptId) {
+			this.term = term;
+			this.conceptId = conceptId;
+		}
+		
+		public String getTerm() {
+			return term;
+		}
+		
+		public String getConceptId() {
+			return conceptId;
+		}
+		
 	}
 }
 //Link:
-//http://kong.github.io/unirest-java/#requests
+//http://kong.github.io/unirest-java/#requestsuests
