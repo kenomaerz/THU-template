@@ -20,3 +20,4 @@ src/main/java/util/Config.java
 .idea/
 
 *.iml
+/.DS_Store
