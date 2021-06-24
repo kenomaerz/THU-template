@@ -1,0 +1,21 @@
+1. 	Term: Ageing
+	Concept ID: 248280005
+ 2. 	Term: Ageusia
+	Concept ID: 36955009
+ 3. 	Term: Old-age
+	Concept ID: 49808004
+ 4. 	Term: Teen-age
+	Concept ID: 22396007
+ 5. 	Term: Ageustia
+	Concept ID: 36955009
+ 6. 	Term: Middle-age
+	Concept ID: 28288005
+ 7. 	Term: Tall for age
+	Concept ID: 83077003
+ 8. 	Term: Advanced age
+	Concept ID: 49808004
+ 9. 	Term: Aged parents
+	Concept ID: 161061004
+ 10. 	Term: Aged parents
+	Concept ID: 138376000
+ 
