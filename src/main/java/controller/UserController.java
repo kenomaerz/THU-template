@@ -9,7 +9,7 @@ import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-import model.ObservationModel;
+import model.AbstractObservationModel;
 import server.Server;
 import view.PatientenView;
 import view.UserView;
@@ -58,7 +58,7 @@ public class UserController extends Controller {
 		
 		ArrayList<String> PatientIDArray = s.getPatients();
 		 
-		// ArrayList<String> PatientIDArray = new ArrayList<>(Arrays.asList("Buenos Aires", "Córdoba", "La Plata")); 
+		// ArrayList<String> PatientIDArray = new ArrayList<>(Arrays.asList("Buenos Aires", "Cï¿½rdoba", "La Plata")); 
 		 
 					 if(PatientIDArray.size() == 0) {
 			 PatientenView.observation().setText("No Patient IDs can be found");
