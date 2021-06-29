@@ -1,12 +1,18 @@
 package view;
+import view.PatientenView;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import controller.UserController;
 import view.ViewStyle;
 
 public class Login extends ViewStyle {
@@ -16,6 +22,9 @@ public class Login extends ViewStyle {
 	private JPasswordField passwordField;
 	private JButton loginButton;
 
+	
+			
+		
 	public Login() {
 		super();
 		setTitle("Welcome | Login"); 
@@ -64,6 +73,8 @@ public class Login extends ViewStyle {
 		loginButton.setFont(BUTTON_FONT);
 		loginButton.setBounds(65, 188, 89, 23);
 		this.contentPane.add(loginButton);	
+		
+		
 	}
 
 	public JTextField getUserTextField() {
@@ -78,4 +89,42 @@ public class Login extends ViewStyle {
 		return loginButton;
 	}
 
+	public static void main(String[]args) {
+		EventQueue.invokeLater(new Runnable(){
+			public void run() {
+				try {
+					Login window = new Login();
+					window.contentPane.setVisible(true);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}}
+		});
+	}
+	public void actionPerformed(ActionEvent e) {
+		String user=userTextField.getText();
+		String password=passwordField.getText();
+		System.out.println(user+", "+password);
+		if(user.equals("admin")&&password.equals("thu123")) {
+			
+		passwordField.setText(null);	
+		userTextField.setText(null);
+		//PatientenView info= new PatientenView(password);
+		//PatientenView.main(null);
+		UserController userCo = new UserController();
+    	
+        userCo.setPatientenView();
+        
+	}else {
+		JOptionPane.showMessageDialog(null, "invalid login details", "login error", JOptionPane.ERROR_MESSAGE);
+		passwordField.setText(null);
+		userTextField.setText(null);
+		
+		return ;
+		
+	}
+		
+		}
+				
 }
+	
+			
