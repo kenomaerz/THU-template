@@ -7,8 +7,8 @@ import javax.swing.JButton;
 
 import view.Login;
 
-public class Controller{
-	
+public class Controller {
+
 //	Model model;
 //	
 //	public Controller(Model model){
@@ -19,30 +19,31 @@ public class Controller{
 	public void start() {
 		this.setLogin();
 	}
+
 //	
 //
 //	
-	protected void setLogin(){
+	protected void setLogin() {
 		Login login = new Login();
 		login.setVisible(true);
 		this.setLoginViewActionListener(login);
 	}
 
 	protected void setLoginViewActionListener(Login login) {
-		JButton loginButton = login.getLoginButton(); 
+		JButton loginButton = login.getLoginButton();
 		login.getRootPane().setDefaultButton(loginButton);
 		loginButton.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e)  {
+			public void actionPerformed(ActionEvent e) {
 //                String userName = login.getUserTextField().getText();
 //                String password = String.valueOf(login.getPasswordField().getPassword());
-               
-            	UserController userCo = new UserController();
-            	
-                userCo.setPatientenView();
-                
-                // TODO: Login
-                
+
+				UserController userCo = new UserController();
+
+				// userCo.setPatientenView();
+
+				// TODO: Login
+
 //                try {
 //                	model.logOn(userName, password);
 //                    login.dispose();
@@ -74,13 +75,9 @@ public class Controller{
 //                    error.printStackTrace();
 //                }
 //                
-                
-           }
+
+			}
 		});
 	}
-	
+
 }
-		
-	
-			
-	
