@@ -87,19 +87,19 @@ public class PatientenView extends ViewStyle {
 //		descriptionLabel.setFont(LABEL_FONT);
 //		descriptionLabel.setBounds(100, 90, 200, 23);
 
-		
+		observation = new JTextArea();
 
 		JScrollPane scroll = new JScrollPane();
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		getObservation().setBounds(50, 120, 700, 200);
-		getObservation().setEditable(false);
+		observation.setBounds(50, 120, 700, 200);
+		observation.setEditable(false);
 		scroll.setBounds(50, 120, 700, 200);
 //		this.contentPane.add(descriptionLabel);
-		this.contentPane.add(getObservation());
+		this.contentPane.add(observation);
 		this.contentPane.add(scroll);
-		scroll.setViewportView(getObservation());
+		scroll.setViewportView(observation);
 	}
 
 	private void initializesearchPatientButton() {
@@ -144,21 +144,11 @@ public class PatientenView extends ViewStyle {
 
 	public static JTextArea observation() {
 
-		return getObservation();
+		return observation;
 	}
 
 	public JButton getPatientIDButton() {
 		return PatientIDButton;
-	}
-
-	public static JTextArea getObservation() {
-		return observation;
-	
-	}
-
-	public static void main(Object object) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
