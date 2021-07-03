@@ -19,7 +19,7 @@ import view.UserView;
 public class UserController extends Controller {
 	Server s = new Server();
 
-	public UserController() {
+	public UserController(String user) {
 		s.createPatient("Hey", "Ho", Enumerations.AdministrativeGender.MALE);
 		s.createPatient("Herbert", "Hans", Enumerations.AdministrativeGender.MALE);
 		s.createPatient("Helmut", "Gustav", Enumerations.AdministrativeGender.MALE);
@@ -28,18 +28,19 @@ public class UserController extends Controller {
 		// ArrayList<String> PatientIDArray = s.getPatients();
 		// System.out.println(PatientIDArray.size());
 		System.out.println(idP);
-		setUserView();
-		setPatientenView();
+		//setUserView();
+		setPatientenView(user);
 	}
 
 	public void setUserView() {
 		UserView userView = new UserView("UK DSM | Abteilung: KIM");
 		userView.setVisible(true);
+		setUserViewActionListener(userView);
 
 	}
 
-	public void setPatientenView() {
-		PatientenView patientenView = new PatientenView("Patient");
+	public void setPatientenView(String user) {
+		PatientenView patientenView = new PatientenView(user);
 		patientenView.setVisible(true);
 		setPatientenViewActionListener(patientenView);
 
@@ -120,11 +121,11 @@ public class UserController extends Controller {
 				}
 
 				catch (Exception e1) {
-					System.out.println("Cannot Search in the Server");
+					System.out.println("No Observations have been found due to an error");
 				}
 			}
 
-			private void setUserViewActionListener(UserView userView) {
+			/*private void setUserViewActionListener(UserView userView) {
 				JButton PatientenakteButton = userView.getPatientenakteButton();
 
 				PatientenakteButton.addActionListener(new ActionListener() {
@@ -148,10 +149,25 @@ public class UserController extends Controller {
 //JTextArea showObservation = userView.getshowObservation();
 
 				});
-			}
+			}*/
 		});
 	}
 
+	private void setUserViewActionListener(UserView userView) {
+		JButton logoutButton = userView.getLogoutButton();
+
+		logoutButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				Controller controller = new Controller();
+		 		controller.start();
+				userView.setVisible(false);
+
+			}
+
+		});
+	}
 	// protected PatientenView searchDataButton() {
 	// TODO Auto-generated method stub
 	// return null;

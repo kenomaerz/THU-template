@@ -15,7 +15,7 @@ public class StartDataValueOutput {
  		controller.start();
  		
  		
- 		String fileName= "./src/CSVData/DATA_2021-03-31_2145.csv";
+ 		/*String fileName= "./src/CSVData/DATA_2021-03-31_2145.csv";
  		File file= new File(fileName);
  		
  		 List<List<String>> lines = new ArrayList<>();
@@ -46,7 +46,7 @@ public class StartDataValueOutput {
              lineNo++;	
 
 	}
-
+*/
 //		Model model;
 //		try {
 //			model = new Model();

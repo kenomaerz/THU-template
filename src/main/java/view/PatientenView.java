@@ -43,6 +43,7 @@ public class PatientenView extends ViewStyle {
 		this.initializeBackButton();
 		this.initializePatientIDButton();
 		this.initializeDescriptionTextArea();
+		this.initializeUserLabel(userName);
 
 	}
 //
@@ -68,11 +69,11 @@ public class PatientenView extends ViewStyle {
 	private void initalizeUserLabelAndTextField() {
 		JLabel patientenLabel = new JLabel("Patient ID:");
 		patientenLabel.setFont(LABEL_FONT);
-		patientenLabel.setBounds(65, 35, 100, 25);
+		patientenLabel.setBounds(65, 70, 100, 25);
 
 		patientenTextField = new JTextField();
 		patientenTextField.setFont(LABEL_FONT);
-		patientenTextField.setBounds(65, 60, 280, 25);
+		patientenTextField.setBounds(65, 95, 280, 25);
 
 		this.contentPane.add(patientenLabel);
 		this.contentPane.add(patientenTextField);
@@ -93,9 +94,9 @@ public class PatientenView extends ViewStyle {
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		observation.setBounds(50, 120, 700, 200);
+		observation.setBounds(65, 155, 700, 200);
 		observation.setEditable(false);
-		scroll.setBounds(50, 120, 700, 200);
+		scroll.setBounds(50, 155, 700, 200);
 //		this.contentPane.add(descriptionLabel);
 		this.contentPane.add(observation);
 		this.contentPane.add(scroll);
@@ -105,7 +106,7 @@ public class PatientenView extends ViewStyle {
 	private void initializesearchPatientButton() {
 		searchDataButton = new JButton("search");
 		searchDataButton.setFont(BUTTON_FONT);
-		searchDataButton.setBounds(65, 88, 89, 23);
+		searchDataButton.setBounds(65, 123, 89, 23);
 		this.contentPane.add(searchDataButton);
 	}
 
@@ -119,14 +120,14 @@ public class PatientenView extends ViewStyle {
 	private void initializeUserLabel(String userName) {
 		JLabel userLabel = new JLabel("User: " + userName);
 		userLabel.setFont(LABEL_FONT);
-		userLabel.setBounds(75, 35, 300, 23);
+		userLabel.setBounds(65, 35, 300, 23);
 		this.contentPane.add(userLabel);
 	}
 
 	private void initializePatientIDButton() {
 		PatientIDButton = new JButton("Patient IDs");
 		PatientIDButton.setFont(BUTTON_FONT);
-		PatientIDButton.setBounds(230, 88, 115, 23);
+		PatientIDButton.setBounds(230, 123, 115, 23);
 		this.contentPane.add(PatientIDButton);
 	}
 
