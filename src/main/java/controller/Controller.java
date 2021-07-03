@@ -53,7 +53,7 @@ public class Controller {
 				char[] password=login.getPasswordField().getPassword();
 				String sPassword = new String(password);
 				System.out.println(user+", "+sPassword);
-				if(user.equals("admin") && sPassword.equals("thu123")) {
+				if((user.equals("person1") && sPassword.equals("thu123"))||(user.equals("person2") && sPassword.equals("12345"))) {
 					
 				login.getPasswordField().setText(null);	
 				login.getUserTextField().setText(null);
