@@ -25,10 +25,9 @@ public class UserController extends Controller {
 		s.createPatient("Helmut", "Gustav", Enumerations.AdministrativeGender.MALE);
 		String idP = s.createPatient("Lars", "Sahne", Enumerations.AdministrativeGender.FEMALE);
 
-		// ArrayList<String> PatientIDArray = s.getPatients();
-		// System.out.println(PatientIDArray.size());
+	
 		System.out.println(idP);
-		//setUserView();
+		
 		setPatientenView(user);
 	}
 
@@ -68,8 +67,7 @@ public class UserController extends Controller {
 
 					ArrayList<String> PatientIDArray = s.getPatients();
 
-					// ArrayList<String> PatientIDArray = new ArrayList<>(Arrays.asList("Buenos
-					// Aires", "C�rdoba", "La Plata"));
+					
 
 					if (PatientIDArray.size() == 0) {
 						PatientenView.observation().setText("No Patient IDs can be found");
@@ -125,31 +123,7 @@ public class UserController extends Controller {
 				}
 			}
 
-			/*private void setUserViewActionListener(UserView userView) {
-				JButton PatientenakteButton = userView.getPatientenakteButton();
-
-				PatientenakteButton.addActionListener(new ActionListener() {
-
-					public void actionPerformed(ActionEvent e) {
-						userView.dispose();
-						setPatientenView();
-
-					}
-				});
-
-				JButton LogoutButton = userView.getLogoutButton();
-
-				LogoutButton.addActionListener(new ActionListener() {
-
-					public void actionPerformed(ActionEvent e) {
-						userView.dispose();
-						setLogin();
-
-					}
-//JTextArea showObservation = userView.getshowObservation();
-
-				});
-			}*/
+			
 		});
 	}
 
@@ -163,13 +137,32 @@ public class UserController extends Controller {
 				Controller controller = new Controller();
 		 		controller.start();
 				userView.setVisible(false);
+				
+			}
+		});
+		
+		JButton PatientenakteButton = userView.getPatientenakteButton();
+
+		PatientenakteButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				userView.dispose();
+				setPatientenView();
+
+		
 
 			}
 
 		});
 	}
-	// protected PatientenView searchDataButton() {
-	// TODO Auto-generated method stub
-	// return null;
+	
+
+	protected void setPatientenView() {
+		PatientenView patientenView = new PatientenView(null);
+		patientenView.setVisible(true);
+		setPatientenViewActionListener(patientenView);
+
+		
+	}
 }
 //}
