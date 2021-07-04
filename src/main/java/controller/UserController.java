@@ -155,10 +155,12 @@ public class UserController extends Controller {
 
 		});
 	}
-	
 
-	protected void setPatientenView() {
-		PatientenView patientenView = new PatientenView(null);
+	
+	
+	public void setPatientenView() {
+		String user = "admin";
+		PatientenView patientenView = new PatientenView(user);
 		patientenView.setVisible(true);
 		setPatientenViewActionListener(patientenView);
 

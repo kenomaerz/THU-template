@@ -35,7 +35,7 @@ public class PatientenView extends ViewStyle {
 	public PatientenView(String userName) {
 		super();
 		setTitle("Universitätsklinikum DSM");
-		setBounds(0, 0, 1000, 1000);
+		setBounds(0, 0, 1000, 650);
 		setLocationRelativeTo(null);
 		this.initalizeUserLabelAndTextField();
 //		this.initalizeObservation();
@@ -94,9 +94,9 @@ public class PatientenView extends ViewStyle {
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		observation.setBounds(65, 155, 700, 200);
+		observation.setBounds(80, 155, 700, 200);
 		observation.setEditable(false);
-		scroll.setBounds(50, 155, 700, 200);
+		scroll.setBounds(155, 210, 700, 200);
 //		this.contentPane.add(descriptionLabel);
 		this.contentPane.add(observation);
 		this.contentPane.add(scroll);
