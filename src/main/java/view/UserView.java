@@ -15,7 +15,7 @@ public class UserView extends ViewStyle  {
 	private static final long serialVersionUID = 1L;
 	private JButton PatientenakteButton;  
 	private JButton logoutButton;
-	
+	private JButton createPatient;
 	
 	
 	public UserView(String userName) {
@@ -24,7 +24,7 @@ public class UserView extends ViewStyle  {
 		setTitle("Welcome " + userName);
 		this.initializePatientenakteButton();
 		this.initializeLogoutButton();
-
+		this.initializecreatePatient();
 	}
 
 	private void initializePatientenakteButton() {
@@ -40,17 +40,23 @@ public class UserView extends ViewStyle  {
 		logoutButton.setBounds(40, 230, 89, 23);
 		this.contentPane.add(logoutButton);
 	}
-	
-
+	private void initializecreatePatient() {
+		createPatient = new JButton("create Patient");
+		createPatient.setFont(BUTTON_FONT);
+		createPatient.setBounds(110, 150, 160, 30);
+		this.contentPane.add(createPatient);
+	}
 	public JButton getLogoutButton() {
 		return logoutButton;
 	}
 	
-	
 	public JButton getPatientenakteButton() {
-		return PatientenakteButton;	}
+		return PatientenakteButton;	
+		}
 
-	
+	public JButton getcreatePatient() {
+		return createPatient;	
+		}
 	}
 	
 	
