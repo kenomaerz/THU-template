@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -16,8 +18,15 @@ setTitle("Patient statement");
 this.initTextFields();
 this.initlabels();
 this.initButtons();
+this.Logo();
 }
-
+private void Logo() {
+Icon imgIcon = new ImageIcon (this.getClass().getResource("pb1.png"));
+JLabel imglabel = new JLabel(imgIcon);
+imglabel.setBounds(280, 40, 95, 95);
+this.getContentPane().add(imglabel);
+setVisible(true);
+}
 private JButton saveButton = new JButton("Save");
 private JButton cancelButton = new JButton("Cancel");
 
