@@ -17,6 +17,7 @@ import model.CategorialObservationModel;
 import view.PatientenView;
 import view.UserView;
 import view.createPatientView;
+import view.observationView;
 
 public class UserController extends Controller {
 Server s = new Server();
@@ -29,7 +30,8 @@ String idP = s.createPatient("Melanie", "Elefteriatdu", Enumerations.Administrat
 
 System.out.println(idP);
 setUserView();
-// setcreatePatientView();
+setcreatePatientView();
+setobservationView();
 }
 
 public void setUserView() {
@@ -51,7 +53,18 @@ createpatientView.setVisible(true);
 setcreatePatientViewActionListener(createpatientView);
 
 }
+public void setobservationView() {
+observationView observationView = new observationView();
+observationView.setVisible(true);
+setobservationViewActionListener(observationView);
 
+}
+
+
+private void setobservationViewActionListener(observationView observationView) {
+	// TODO Auto-generated method stub
+	
+}
 
 private void setcreatePatientViewActionListener(createPatientView createpatientView) {
 JButton CancelButton = createpatientView.getCancelButton();

@@ -21,6 +21,7 @@ this.initButtons();
 private JButton saveButton = new JButton("Save");
 private JButton cancelButton = new JButton("Cancel");
 
+private JTextField patientIDField = new JTextField("");
 private JTextField patientDateField = new JTextField("");
 private JTextField patientinoutField = new JTextField("");
 private JTextField patientLastNameField = new JTextField("");
@@ -35,6 +36,7 @@ private JTextField patientCityField = new JTextField("");
 private void initlabels() {
 JLabel title = new JLabel("Patient statement");
 JLabel border = new JLabel("______________________________________");
+JLabel patientIDLabel = new JLabel("PatientID: ");
 JLabel patientDateLabel = new JLabel("Date:");
 JLabel patientinoutLabel = new JLabel("Inpatient/Outpatient:");
 JLabel patientLastNameLabel = new JLabel("Last Name:");
@@ -51,6 +53,7 @@ JLabel patientCityLabel = new JLabel("City:");
 // Set Label Bounds
 title.setBounds(22, 20, 500, 35);
 border.setBounds(25, 140, 350, 30);
+patientIDLabel.setBounds(25, 185, 150, 25);
 patientDateLabel.setBounds(25, 215, 150, 25);
 patientFirstNameLabel.setBounds(25, 250, 150, 25);
 patientLastNameLabel.setBounds(25, 285, 150, 25);
@@ -67,6 +70,7 @@ border.setEnabled(false);
 // Add Labels to Pane
 this.contentPane.add(title);
 contentPane.add(border);
+this.contentPane.add(patientIDLabel);
 this.contentPane.add(patientinoutLabel);
 this.contentPane.add(patientDateLabel);
 this.contentPane.add(patientBirthdateLabel);
@@ -81,6 +85,7 @@ this.contentPane.add(patientCityLabel);
 
 private void initTextFields() {
 // Set TextField Bounds
+patientIDField.setBounds(165, 185, 200, 25);
 patientDateField.setBounds(165, 215, 200, 25);
 patientFirstNameField.setBounds(165, 250, 200, 25);
 patientLastNameField.setBounds(165, 285, 200, 25);
@@ -93,7 +98,7 @@ patientCityField.setBounds(165, 485, 200, 25);
 patientPhoneField.setBounds(165, 515, 200, 25);
 
 // Add TextFields to Pane
-
+this.contentPane.add(patientIDField);
 this.contentPane.add(patientDateField);
 this.contentPane.add(patientFirstNameField);
 this.contentPane.add(patientLastNameField);
@@ -125,6 +130,11 @@ this.contentPane.add(cancelButton);
 
 public void setOperatingButtonsEnabled() {
 saveButton.setEnabled(true);
+
+}
+
+public JTextField patientIDField() {
+return patientIDField;
 }
 public JTextField getpatientinoutField() {
 return patientinoutField;
