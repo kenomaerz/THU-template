@@ -25,131 +25,109 @@ import view.ViewStyle;
 
 public class PatientenView extends ViewStyle {
 
-	private static final long serialVersionUID = 1L;
-	private static JTextField patientenTextField;
-	private JButton searchDataButton;
-	private JButton backButton;
-	private static JTextArea observation;
-	private JButton PatientIDButton;
+private static final long serialVersionUID = 1L;
+private static JTextField patientenTextField;
+private JButton searchDataButton;
+private JButton backButton;
+private static JTextArea observation;
+private JButton PatientIDButton;
 
-	public PatientenView(String userName) {
-		super();
-		setTitle("Universitätsklinikum DSM");
-		setBounds(0, 0, 1000, 650);
-		setLocationRelativeTo(null);
-		this.initalizeUserLabelAndTextField();
-//		this.initalizeObservation();
-		this.initializesearchPatientButton();
-		this.initializeBackButton();
-		this.initializePatientIDButton();
-		this.initializeDescriptionTextArea();
-		this.initializeUserLabel(userName);
+public PatientenView(String userName) {
+super();
+setTitle("Universitätsklinikum DSM");
+setBounds(0, 0, 1000, 650);
+setLocationRelativeTo(null);
+this.initalizeUserLabelAndTextField();
 
-	}
-//
-//	private void initalizeObservation() {
-//
-//		observation = new JTextArea(5, 20);
-//		observation.setBounds(120, 150, 350, 300);
-//		observation.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-//		observation.setEditable(false);
-//		observation.setBackground(Color.LIGHT_GRAY);
-//		observation.setEditable(false);
-//		JScrollPane scroll = new JScrollPane();
-//		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//		scroll.setBounds(138, 150, 400, 317);
-//		scroll.setViewportView(observation);
-//
-//		this.contentPane.add(observation);
-//		this.contentPane.add(scroll);
+this.initializesearchPatientButton();
+this.initializeBackButton();
+this.initializePatientIDButton();
+this.initializeDescriptionTextArea();
+this.initializeUserLabel(userName);
 
-//	}
+}
 
-	private void initalizeUserLabelAndTextField() {
-		JLabel patientenLabel = new JLabel("Patient ID:");
-		patientenLabel.setFont(LABEL_FONT);
-		patientenLabel.setBounds(65, 70, 100, 25);
 
-		patientenTextField = new JTextField();
-		patientenTextField.setFont(LABEL_FONT);
-		patientenTextField.setBounds(65, 95, 280, 25);
+private void initalizeUserLabelAndTextField() {
+JLabel patientenLabel = new JLabel("Patient ID:");
+patientenLabel.setFont(LABEL_FONT);
+patientenLabel.setBounds(65, 70, 100, 25);
 
-		this.contentPane.add(patientenLabel);
-		this.contentPane.add(patientenTextField);
+patientenTextField = new JTextField();
+patientenTextField.setFont(LABEL_FONT);
+patientenTextField.setBounds(65, 95, 280, 25);
 
-// JLabel border = new JLabel("________________________________________________________________________________");
-// border.setBounds(65, 100, 2000, 30);
-// this.contentPane.add(border);
-	}
+this.contentPane.add(patientenLabel);
+this.contentPane.add(patientenTextField);
 
-	private void initializeDescriptionTextArea() {
-//		JLabel descriptionLabel = new JLabel("Description");
-//		descriptionLabel.setFont(LABEL_FONT);
-//		descriptionLabel.setBounds(100, 90, 200, 23);
 
-		observation = new JTextArea();
+}
 
-		JScrollPane scroll = new JScrollPane();
-		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+private void initializeDescriptionTextArea() {
 
-		observation.setBounds(80, 155, 700, 200);
-		observation.setEditable(false);
-		scroll.setBounds(155, 210, 700, 200);
-//		this.contentPane.add(descriptionLabel);
-		this.contentPane.add(observation);
-		this.contentPane.add(scroll);
-		scroll.setViewportView(observation);
-	}
 
-	private void initializesearchPatientButton() {
-		searchDataButton = new JButton("search");
-		searchDataButton.setFont(BUTTON_FONT);
-		searchDataButton.setBounds(65, 123, 89, 23);
-		this.contentPane.add(searchDataButton);
-	}
+observation = new JTextArea();
 
-	private void initializeBackButton() {
-		backButton = new JButton("back");
-		backButton.setFont(BUTTON_FONT);
-		backButton.setBounds(50, 520, 89, 23);
-		this.contentPane.add(backButton);
-	}
+JScrollPane scroll = new JScrollPane();
+scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-	private void initializeUserLabel(String userName) {
-		JLabel userLabel = new JLabel("User: " + userName);
-		userLabel.setFont(LABEL_FONT);
-		userLabel.setBounds(65, 35, 300, 23);
-		this.contentPane.add(userLabel);
-	}
+observation.setBounds(80, 155, 700, 200);
+observation.setEditable(false);
+scroll.setBounds(155, 210, 700, 200);
 
-	private void initializePatientIDButton() {
-		PatientIDButton = new JButton("Patient IDs");
-		PatientIDButton.setFont(BUTTON_FONT);
-		PatientIDButton.setBounds(230, 123, 115, 23);
-		this.contentPane.add(PatientIDButton);
-	}
+this.contentPane.add(observation);
+this.contentPane.add(scroll);
+scroll.setViewportView(observation);
+}
 
-	public static JTextField getPatientenTextField() {
-		return patientenTextField;
-	}
+private void initializesearchPatientButton() {
+searchDataButton = new JButton("search");
+searchDataButton.setFont(BUTTON_FONT);
+searchDataButton.setBounds(65, 123, 89, 23);
+this.contentPane.add(searchDataButton);
+}
 
-	public JButton getBackButton() {
-		return backButton;
-	}
+private void initializeBackButton() {
+backButton = new JButton("Cancel");
+backButton.setFont(BUTTON_FONT);
+backButton.setBounds(50, 520, 89, 23);
+this.contentPane.add(backButton);
+}
 
-	public JButton getsearchDataButton() {
-		return searchDataButton;
-	}
+private void initializeUserLabel(String userName) {
+JLabel userLabel = new JLabel("User: " + userName);
+userLabel.setFont(LABEL_FONT);
+userLabel.setBounds(65, 35, 300, 23);
+this.contentPane.add(userLabel);
+}
 
-	public static JTextArea observation() {
+private void initializePatientIDButton() {
+PatientIDButton = new JButton("Patient IDs");
+PatientIDButton.setFont(BUTTON_FONT);
+PatientIDButton.setBounds(230, 123, 115, 23);
+this.contentPane.add(PatientIDButton);
+}
 
-		return observation;
-	}
+public static JTextField getPatientenTextField() {
+return patientenTextField;
+}
 
-	public JButton getPatientIDButton() {
-		return PatientIDButton;
-	}
+public JButton getBackButton() {
+return backButton;
+}
+
+public JButton getsearchDataButton() {
+return searchDataButton;
+}
+
+public static JTextArea observation() {
+
+return observation;
+}
+
+public JButton getPatientIDButton() {
+return PatientIDButton;
+}
 
 }
