@@ -69,8 +69,8 @@ public class CTView {
 	
 	private void printHelp() {
         System.out.println("help - shows this information");
-        System.out.println("show - shows the concepts of a term");
-        System.out.println("tags - shows semantic tags");
+        System.out.println("show - shows the concepts of a term (example: age, stomach, heart...)");
+        System.out.println("tags - shows semantic tags (finding)");
         System.out.println("save - save terms to file");
         System.out.println("exit - exits the application");
         //...
