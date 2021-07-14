@@ -1,5 +1,7 @@
 package view;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +12,17 @@ import modelCTSNOMED.CTmodel.CTDescription;
 
 public class CTView {
 		
-	public CTView(ctcontroller controller) {
+	public CTView(ctcontroller controller) throws IOException {
 		controller.setView(this);
 
 		printHelp();
 		
 		Scanner scanner = new Scanner(new InputStreamReader(System.in));
+		String file ="File.txt";
 		System.out.print("Enter command: ");
 		String input = scanner.nextLine();
+		FileWriter writer = new FileWriter(file);
+		
 		
 		while (!"exit".equals(input)) {
 			switch (input) {
@@ -35,6 +40,9 @@ public class CTView {
 		                mappedTerms.add(mappedTermInput);
 		                System.out.print("Add another mapped term: ");
 		                mappedTermInput = scanner.nextLine();
+		            }
+		            for(String str: mappedTerms) {
+		            	writer.write(str + System.lineSeparator());
 		            }
 		            break;
 		        case "show":
