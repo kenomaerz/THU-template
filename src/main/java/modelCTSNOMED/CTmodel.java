@@ -6,10 +6,11 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +53,9 @@ public class CTmodel {
 	}
 
 	public void ctDescriptions(String term, String semanticTag, int limit) throws IOException, UnirestException {
+		
+		
+	
 		descriptions = new ArrayList<CTDescription>();
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
 				.queryString("term", Arrays.asList(term))
@@ -63,13 +67,32 @@ public class CTmodel {
 		String jsonString = body;
 		JSONObject obj = new JSONObject(jsonString);
 		JSONArray arr = obj.getJSONArray("items");
+		
+		
+		FileWriter writer;
+		File datei = new File (term + ".txt");
 
 		for (int i = 0; i < arr.length(); i++) {
 			
 			String termCT = arr.getJSONObject(i).getString("term");
 			JSONObject concept_id = arr.getJSONObject(i).getJSONObject("concept");
 			descriptions.add(new CTDescription(termCT, concept_id.getString("conceptId")));
-			//System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
+		//System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
+			
+			try {
+				writer = new FileWriter(datei, true);
+				writer.write(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
+				//writer.write(System.getProperty("line.separator"));
+				
+				writer.flush();
+				writer.close();
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+			
 
 		}
 

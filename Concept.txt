@@ -18,4 +18,14 @@
 	Concept ID: 161061004
  10. 	Term: Aged parents
 	Concept ID: 138376000
+ 1. 	Term: Heartburn
+	Concept ID: 16331000
+ 2. 	Term: Heartburn
+	Concept ID: 271831008
+ 3. 	Term: Heartburn
+	Concept ID: 139300004
+ 4. 	Term: Heartburn
+	Concept ID: 139300004
+ 5. 	Term: Heartburn
+	Concept ID: 271831008
  
