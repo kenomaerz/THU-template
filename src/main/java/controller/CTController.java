@@ -15,17 +15,17 @@ import com.mashape.unirest.http.Unirest;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import modelCTSNOMED.CTmodel;
-import modelCTSNOMED.CTmodel.CTDescription;
+import modelCTSNOMED.CTModel;
+import modelCTSNOMED.CTModel.CTDescription;
 import view.CTView;
 
-public class ctcontroller {
+public class CTController {
 
-	private CTmodel model;
+	private CTModel model;
 	private CTView view;
 	
 	
-	public ctcontroller(CTmodel model, CTView view) {
+	public CTController(CTModel model, CTView view) {
 		this.model = model;
 		this.view = view;
 	}

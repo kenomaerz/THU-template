@@ -20,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CTmodel {
+public class CTModel {
 	
 	private List<CTDescription> descriptions;
 	private ArrayList<String> semanticTags;
@@ -54,8 +54,6 @@ public class CTmodel {
 
 	public void ctDescriptions(String term, String semanticTag, int limit) throws IOException, UnirestException {
 		
-		
-	
 		descriptions = new ArrayList<CTDescription>();
 		String body = Unirest.get("https://snowstorm.test-nictiz.nl/browser/MAIN/descriptions?")
 				.queryString("term", Arrays.asList(term))
@@ -77,7 +75,7 @@ public class CTmodel {
 			String termCT = arr.getJSONObject(i).getString("term");
 			JSONObject concept_id = arr.getJSONObject(i).getJSONObject("concept");
 			descriptions.add(new CTDescription(termCT, concept_id.getString("conceptId")));
-		//System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
+			//System.out.println(i + 1 + ". " + "\tTerm: " + termCT + "\n\tConcept ID: " + concept_id.get("conceptId") + "\n ");
 			
 			try {
 				writer = new FileWriter(datei, true);
@@ -92,8 +90,6 @@ public class CTmodel {
 				e.printStackTrace();
 			}
 	
-			
-
 		}
 
 	}
@@ -139,5 +135,6 @@ public class CTmodel {
 		
 	}
 }
+
 //Link:
 //http://kong.github.io/unirest-java/#requestsuests

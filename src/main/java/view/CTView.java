@@ -7,19 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import controller.ctcontroller;
-import modelCTSNOMED.CTmodel.CTDescription;
+import controller.CTController;
+import modelCTSNOMED.CTModel.CTDescription;
 
 public class CTView {
 		
-	public CTView(ctcontroller controller) throws IOException {
+	public CTView(CTController controller) throws IOException {
+		
 		controller.setView(this);
 
 		printHelp();
 		
 		Scanner scanner = new Scanner(new InputStreamReader(System.in));
 		String file ="File.txt";
-		System.out.print("Enter command: ");
+		System.out.print("\nEnter command: ");
 		String input = scanner.nextLine();
 		FileWriter writer = new FileWriter(file);
 		
