@@ -8,4 +8,10 @@
 	Concept ID: 139300004
  5. 	Term: Heartburn
 	Concept ID: 271831008
+ 1. 	Term: Heartwater
+	Concept ID: 73896008
+ 2. 	Term: Weak heart
+	Concept ID: 84114007
+ 3. 	Term: Weak heart
+	Concept ID: 195117009
  
